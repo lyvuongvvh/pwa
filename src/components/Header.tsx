@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Brand / Logo - Viện Việt Học */}
           <button
             onClick={() => setActiveTab('home')}
-            className="flex items-center gap-3 shrink-0 text-left cursor-pointer group"
+            className="flex items-center shrink-0 cursor-pointer group py-1"
             title="Viện Việt Học - Trang Chủ"
           >
             <img
@@ -87,19 +87,6 @@ export const Header: React.FC<HeaderProps> = ({
               alt="Viện Việt Học"
               className="h-11 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
             />
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-base tracking-tight text-white font-serif hidden sm:inline drop-shadow-md">
-                  VIỆN VIỆT HỌC
-                </span>
-                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-sm bg-amber-400/30 text-amber-200 border border-amber-400/50">
-                  PWA
-                </span>
-              </div>
-              <p className="text-[11px] text-amber-200/90 hidden lg:block font-medium drop-shadow-xs">
-                Thư Viện & Cổng Tra Cứu Toàn Văn
-              </p>
-            </div>
           </button>
 
           {/* Quick Search in Header */}
