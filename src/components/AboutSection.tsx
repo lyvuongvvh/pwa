@@ -19,20 +19,29 @@ export const AboutSection: React.FC = () => {
     <div className="space-y-8 pb-12">
       {/* Masthead */}
       <div className="bg-linear-to-r from-[#800020] via-[#8b1538] to-[#580d23] rounded-2xl p-8 text-white shadow-xl border border-[#9f2244]">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30 text-xs font-semibold uppercase mb-3">
-            <Building className="w-3.5 h-3.5 text-amber-300" />
-            <span>Thành lập ngày 26 tháng 2 năm 2000</span>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 max-w-5xl">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30 text-xs font-semibold uppercase mb-3">
+              <Building className="w-3.5 h-3.5 text-amber-300" />
+              <span>Thành lập ngày 26 tháng 2 năm 2000</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold font-serif tracking-tight text-white mb-2">
+              Giới Thiệu Viện Việt Học
+            </h1>
+            <p className="text-base font-medium text-amber-200 uppercase tracking-wider mb-4">
+              INSTITUTE OF VIETNAMESE STUDIES &bull; WESTMINSTER, CALIFORNIA
+            </p>
+            <p className="text-sm sm:text-base text-rose-100 leading-relaxed italic">
+              &ldquo;Viện Việt Học là một tổ chức nghiên cứu và giáo dục bất vụ lợi, hướng tới mục tiêu giữ gìn và thắp sáng ngọn lửa văn hóa, lịch sử và ngôn ngữ dân tộc Việt Nam cho các thế hệ hôm nay và mai sau.&rdquo;
+            </p>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold font-serif tracking-tight text-white mb-2">
-            Giới Thiệu Viện Việt Học
-          </h1>
-          <p className="text-base font-medium text-amber-200 uppercase tracking-wider mb-4">
-            INSTITUTE OF VIETNAMESE STUDIES &bull; WESTMINSTER, CALIFORNIA
-          </p>
-          <p className="text-sm sm:text-base text-rose-100 leading-relaxed italic">
-            &ldquo;Viện Việt Học là một tổ chức nghiên cứu và giáo dục bất vụ lợi, hướng tới mục tiêu giữ gìn và thắp sáng ngọn lửa văn hóa, lịch sử và ngôn ngữ dân tộc Việt Nam cho các thế hệ hôm nay và mai sau.&rdquo;
-          </p>
+          <div className="shrink-0 p-3 rounded-2xl bg-white/95 backdrop-blur-xs border-2 border-amber-400/50 shadow-xl self-center md:self-auto">
+            <img
+              src="/viethoc-logo.jpg"
+              alt="Logo Viện Việt Học"
+              className="h-20 w-auto object-contain"
+            />
+          </div>
         </div>
       </div>
 

@@ -86,7 +86,17 @@ export const FrontPage: React.FC<FrontPageProps> = ({
         <div className="absolute left-1/4 -top-20 w-72 h-72 rounded-full bg-rose-500/10 blur-2xl pointer-events-none" />
 
         <div className="relative z-10 px-6 py-10 sm:px-10 sm:py-14 max-w-5xl mx-auto text-center">
-          {/* Official Emblem & Badge */}
+          {/* Official Emblem Logo from viethoc.com */}
+          <div className="flex justify-center mb-6">
+            <div className="p-2 sm:p-3 rounded-2xl bg-white/95 backdrop-blur-xs border-2 border-amber-400/50 shadow-2xl inline-flex items-center justify-center">
+              <img
+                src="/viethoc-logo.jpg"
+                alt="Viện Việt Học - Institute of Vietnamese Studies"
+                className="h-16 sm:h-20 w-auto object-contain"
+              />
+            </div>
+          </div>
+
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/40 text-xs font-semibold uppercase tracking-wider mb-4">
             <Building className="w-3.5 h-3.5 text-amber-300" />
             <span>Thành lập ngày 26 tháng 2 năm 2000 &bull; Westminster, California</span>

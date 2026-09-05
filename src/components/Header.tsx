@@ -72,20 +72,25 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={() => setActiveTab('home')}
             className="flex items-center gap-3 shrink-0 text-left cursor-pointer group"
+            title="Viện Việt Học - Trang Chủ"
           >
-            <div className="w-10 h-10 rounded-xl bg-linear-to-br from-[#800020] to-[#b91c1c] border border-amber-400/40 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-              <Building className="w-5 h-5 text-amber-200" />
+            <div className="h-11 px-1.5 py-1 rounded-xl bg-white/95 border border-amber-400/40 flex items-center justify-center shadow-md group-hover:scale-102 transition-transform">
+              <img
+                src="/viethoc-logo.jpg"
+                alt="Viện Việt Học"
+                className="h-full w-auto object-contain"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-base tracking-tight text-white font-serif">
+                <span className="font-extrabold text-base tracking-tight text-white font-serif hidden sm:inline">
                   VIỆN VIỆT HỌC
                 </span>
                 <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-sm bg-amber-500/20 text-amber-300 border border-amber-500/30">
                   PWA
                 </span>
               </div>
-              <p className="text-[11px] text-stone-400 hidden sm:block">
+              <p className="text-[11px] text-stone-400 hidden lg:block">
                 Thư Viện & Cổng Tra Cứu Toàn Văn
               </p>
             </div>
