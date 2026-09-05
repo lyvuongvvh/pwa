@@ -303,9 +303,9 @@ function AppContent() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-white/15">
             <div className="flex items-center gap-3.5">
               <img
-                src="/viethoc-logo.jpg"
+                src="/viethoc-logo.png"
                 alt="Viện Việt Học Logo"
-                className="h-11 w-auto object-contain"
+                className="h-11 w-auto object-contain drop-shadow-sm"
               />
               <div>
                 <h3 className="text-sm font-extrabold text-white tracking-wide font-serif">

@@ -83,9 +83,9 @@ export const Header: React.FC<HeaderProps> = ({
             title="Viện Việt Học - Trang Chủ"
           >
             <img
-              src="/viethoc-logo.jpg"
+              src="/viethoc-logo.png"
               alt="Viện Việt Học"
-              className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
+              className="h-11 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform"
             />
             <div>
               <div className="flex items-center gap-2">
