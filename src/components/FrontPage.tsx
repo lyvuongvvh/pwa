@@ -81,6 +81,8 @@ export const FrontPage: React.FC<FrontPageProps> = ({
     <div className="space-y-10 pb-12">
       {/* 1. Viện Việt Học Masthead & Cultural Banner */}
       <section className="relative overflow-hidden rounded-2xl bg-linear-to-b from-[#800020] via-[#8b1538] to-[#580d23] text-white shadow-xl border border-[#9f2244]">
+        {/* Authentic viethoc.com banner motif */}
+        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-25 mix-blend-screen pointer-events-none" />
         {/* Subtle decorative heritage patterns */}
         <div className="absolute -right-16 -bottom-16 w-80 h-80 rounded-full bg-amber-400/10 blur-3xl pointer-events-none" />
         <div className="absolute left-1/4 -top-20 w-72 h-72 rounded-full bg-rose-500/10 blur-2xl pointer-events-none" />

@@ -201,7 +201,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] text-stone-900 flex flex-col font-sans selection:bg-amber-200 selection:text-amber-950">
+    <div className="min-h-screen bg-[url('/viethoc-parchment-bg.jpg')] bg-fixed bg-cover bg-center text-stone-900 flex flex-col font-sans selection:bg-amber-200 selection:text-amber-950">
       {/* Offline Status Badge */}
       <OfflineIndicator />
 

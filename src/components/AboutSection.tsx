@@ -18,8 +18,9 @@ export const AboutSection: React.FC = () => {
   return (
     <div className="space-y-8 pb-12">
       {/* Masthead */}
-      <div className="bg-linear-to-r from-[#800020] via-[#8b1538] to-[#580d23] rounded-2xl p-8 text-white shadow-xl border border-[#9f2244]">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 max-w-5xl">
+      <div className="relative overflow-hidden bg-linear-to-r from-[#800020] via-[#8b1538] to-[#580d23] rounded-2xl p-8 text-white shadow-xl border border-[#9f2244]">
+        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-25 mix-blend-screen pointer-events-none" />
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 max-w-5xl">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30 text-xs font-semibold uppercase mb-3">
               <Building className="w-3.5 h-3.5 text-amber-300" />
