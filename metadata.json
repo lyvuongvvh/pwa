@@ -1,0 +1,6 @@
+{
+  "name": "Document Archive & Portal",
+  "description": "Cổng thông tin và thư viện số Viện Việt Học (Institute of Vietnamese Studies) chuẩn PWA, tìm kiếm toàn văn tài liệu HTML và PDF, quản lý tin tức bài viết học thuật, tích hợp Firebase và phân quyền RBAC.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

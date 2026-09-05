@@ -1,0 +1,244 @@
+{
+  "entities": {
+    "userProfile": {
+      "title": "User Profile",
+      "description": "User profile with role-based access status (admin, editor, viewer).",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Display name of the user"
+        },
+        "photoURL": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Avatar photo URL"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "editor", "viewer"],
+          "description": "User permission role"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the user registered"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the user profile was last updated"
+        }
+      },
+      "required": ["email", "role"]
+    },
+    "document": {
+      "title": "Document",
+      "description": "Uploaded document (HTML or PDF) with full-text search indexing.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique identifier of the document"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "description": "Title of the document"
+        },
+        "fileName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "description": "Original file name"
+        },
+        "fileType": {
+          "type": "string",
+          "enum": ["pdf", "html", "text"],
+          "description": "MIME type category"
+        },
+        "fileSize": {
+          "type": "number",
+          "description": "File size in bytes"
+        },
+        "textContent": {
+          "type": "string",
+          "maxLength": 600000,
+          "description": "Extracted text content for full-text search"
+        },
+        "htmlContent": {
+          "type": "string",
+          "maxLength": 600000,
+          "description": "Renderable HTML content for HTML documents"
+        },
+        "fileDataUrl": {
+          "type": "string",
+          "maxLength": 800000,
+          "description": "Data URL or embedded preview of document"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Brief executive summary or abstract"
+        },
+        "tags": {
+          "type": "string",
+          "description": "Serialized list of tags or keywords"
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Category of the document (e.g. Reports, Research, Policy, Manuals)"
+        },
+        "authorId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Firebase UID of the editor who uploaded it"
+        },
+        "authorEmail": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Email of the author uploader"
+        },
+        "authorName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Display name of the author"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        },
+        "searchTokens": {
+          "type": "string",
+          "description": "Search token index for query optimization"
+        }
+      },
+      "required": ["title", "fileName", "fileType", "authorId", "createdAt", "updatedAt"]
+    },
+    "article": {
+      "title": "Article",
+      "description": "News article or editorial post authored by editors.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique identifier of the article"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "description": "Headline or title of the article"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300000,
+          "description": "Body content of the news article (HTML or Markdown)"
+        },
+        "excerpt": {
+          "type": "string",
+          "maxLength": 600,
+          "description": "Short excerpt or lead paragraph"
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "News category (e.g. Announcement, Press Release, Editorial, Update)"
+        },
+        "coverImage": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "URL to cover image"
+        },
+        "tags": {
+          "type": "string",
+          "description": "Article tags"
+        },
+        "authorId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Firebase UID of author"
+        },
+        "authorEmail": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Email of author"
+        },
+        "authorName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Author display name"
+        },
+        "published": {
+          "type": "string",
+          "description": "Publication state flag string (e.g. 'true' or 'false')"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        },
+        "searchTokens": {
+          "type": "string",
+          "description": "Tokens for search index"
+        }
+      },
+      "required": ["title", "content", "authorId", "createdAt", "updatedAt"]
+    },
+    "adminRecord": {
+      "title": "Admin Record",
+      "description": "Designated administrator identifier record.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Admin email"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role descriptor ('admin')"
+        },
+        "addedAt": {
+          "type": "string",
+          "description": "Timestamp when added"
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "userProfile",
+      "description": "User profiles with assigned roles (admin, editor, viewer)"
+    },
+    "/documents/{documentId}": {
+      "schema": "document",
+      "description": "Archive of uploaded HTML and PDF documents with extracted full text"
+    },
+    "/articles/{articleId}": {
+      "schema": "article",
+      "description": "News announcements and published articles"
+    },
+    "/admins/{adminId}": {
+      "schema": "adminRecord",
+      "description": "Collection of verified administrator IDs"
+    }
+  }
+}
