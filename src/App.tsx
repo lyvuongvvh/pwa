@@ -290,11 +290,19 @@ function AppContent() {
       )}
 
       {/* Footer styled authentically for Viện Việt Học */}
-      <footer className="bg-[#1e2024] text-stone-300 border-t border-stone-800 py-10 mt-12 text-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-stone-800">
+      <footer className="relative overflow-hidden bg-gradient-to-r from-[#072d54] via-[#094277] to-[#072d54] text-amber-100/90 border-t border-amber-500/30 py-10 mt-12 text-xs shadow-inner">
+        {/* Authentic viethoc.com Header Background Motif Overlay */}
+        <div
+          className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-20 mix-blend-screen pointer-events-none"
+          aria-hidden="true"
+        />
+        {/* Subtle top gold accent highlight */}
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-amber-500/10 via-amber-400/50 to-amber-500/10 pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-white/15">
             <div className="flex items-center gap-3.5">
-              <div className="h-12 px-2 py-1 rounded-xl bg-white/95 border border-amber-400/30 flex items-center justify-center shadow-md">
+              <div className="h-12 px-2 py-1 rounded-xl bg-white/95 border border-amber-400/40 flex items-center justify-center shadow-md">
                 <img
                   src="/viethoc-logo.jpg"
                   alt="Viện Việt Học Logo"
@@ -305,25 +313,25 @@ function AppContent() {
                 <h3 className="text-sm font-extrabold text-white tracking-wide font-serif">
                   VIỆN VIỆT HỌC &bull; INSTITUTE OF VIETNAMESE STUDIES
                 </h3>
-                <p className="text-[11px] text-stone-400">
+                <p className="text-[11px] text-amber-200/80">
                   Tổ chức bất vụ lợi thành lập ngày 26/02/2000 tại Westminster, California, Hoa Kỳ
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-[11px] text-stone-400">
+            <div className="flex flex-wrap items-center gap-4 text-[11px] text-amber-100/80">
               <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-rose-500" />
+                <MapPin className="w-3.5 h-3.5 text-amber-300" />
                 <span>15355 Brookhurst St # 222, Westminster, CA 92683</span>
               </span>
               <span className="flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-amber-400" />
+                <Mail className="w-3.5 h-3.5 text-amber-300" />
                 <span>info@viethoc.org &bull; lyvuong@viethoc.com</span>
               </span>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-400">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-amber-200/70">
             <p>
               &copy; {new Date().getFullYear()} Viện Việt Học. Bảo tồn và phát huy di sản văn hóa, ngôn ngữ và lịch sử Việt Nam.
             </p>
