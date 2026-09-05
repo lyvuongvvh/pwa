@@ -290,14 +290,14 @@ function AppContent() {
       )}
 
       {/* Footer styled authentically for Viện Việt Học */}
-      <footer className="relative overflow-hidden bg-gradient-to-r from-[#072d54] via-[#094277] to-[#072d54] text-amber-100/90 border-t border-amber-500/30 py-10 mt-12 text-xs shadow-inner">
-        {/* Authentic viethoc.com Header Background Motif Overlay */}
+      <footer className="relative overflow-hidden bg-[url('/viethoc-header-bg.png')] bg-cover bg-center text-amber-100/90 border-t border-amber-500/40 py-10 mt-12 text-xs shadow-xl">
+        {/* Transparent dark scrim for text legibility without obscuring the viethoc background */}
         <div
-          className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-20 mix-blend-screen pointer-events-none"
+          className="absolute inset-0 bg-black/25 pointer-events-none"
           aria-hidden="true"
         />
         {/* Subtle top gold accent highlight */}
-        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-amber-500/10 via-amber-400/50 to-amber-500/10 pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-amber-500/20 via-amber-400 to-amber-500/20 pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-white/15">
