@@ -80,7 +80,7 @@ export const PWAInstallButton: React.FC = () => {
               </ol>
               <button
                 onClick={() => setShowIOSGuide(false)}
-                className="w-full rounded-xl bg-[#800020] py-2 text-xs font-bold text-white hover:bg-[#6b001a] transition"
+                className="w-full rounded-xl bg-[#0b5394] py-2 text-xs font-bold text-white hover:bg-[#084175] transition"
               >
                 Đã Hiểu
               </button>

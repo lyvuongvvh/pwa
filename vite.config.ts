@@ -17,7 +17,7 @@ export default defineConfig(() => {
           name: 'Viện Việt Học - Thư Viện Văn Kiện & Tin Tức',
           short_name: 'Việt Học',
           description: 'Cổng thông tin và thư viện số Viện Việt Học - Tra cứu toàn văn văn kiện và tài liệu lịch sử',
-          theme_color: '#800020',
+          theme_color: '#0b5394',
           background_color: '#f8f9fa',
           display: 'standalone',
           start_url: '/',

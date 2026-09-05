@@ -160,7 +160,7 @@ export const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
-              <FileText className="w-3.5 h-3.5 text-[#800020]" />
+              <FileText className="w-3.5 h-3.5 text-[#0b5394]" />
               <span>Toàn Văn Trích Xuất</span>
             </button>
             {document.fileType === 'html' && (

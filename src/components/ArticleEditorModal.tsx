@@ -112,16 +112,16 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
         className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-stone-200 overflow-hidden my-6"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#1e2024] text-white border-b border-stone-800">
+        <div className="flex items-center justify-between px-6 py-4 bg-[#0f2b48] text-white border-b border-sky-950">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-[#800020] to-[#b91c1c] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-[#0b5394] to-[#072d54] flex items-center justify-center">
               <Newspaper className="w-4 h-4 text-amber-200" />
             </div>
             <div>
               <h2 className="text-base font-bold text-white font-serif">
                 Đăng Tin Tức & Bài Viết Mới
               </h2>
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-sky-200">
                 Thông báo sinh hoạt, sự kiện học thuật hoặc khảo cứu văn hóa
               </p>
             </div>
@@ -137,8 +137,8 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {error && (
-            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 mt-0.5" />
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
+              <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
@@ -155,7 +155,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Ví dụ: Thông Báo Buổi Thuyết Trình Học Thuật Thứ Bảy"
                 required
-                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#800020]"
+                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394]"
               />
             </div>
             <div>
@@ -163,7 +163,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#800020] cursor-pointer"
+                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#0b5394] cursor-pointer"
               >
                 {CATEGORIES.map((cat) => (
                   <option key={cat} value={cat}>
@@ -184,7 +184,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
               placeholder="Đoạn tóm tắt hiển thị trên trang chủ và danh sách tin tức..."
-              className="w-full text-xs bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#800020] leading-relaxed"
+              className="w-full text-xs bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] leading-relaxed"
             />
           </div>
 
@@ -199,7 +199,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
               onChange={(e) => setContent(e.target.value)}
               placeholder="Nhập toàn văn thông báo hoặc bài nghiên cứu..."
               required
-              className="w-full text-xs font-mono bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#800020] leading-relaxed"
+              className="w-full text-xs font-mono bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] leading-relaxed"
             />
           </div>
 
@@ -218,7 +218,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
                   }
                 }}
                 placeholder="Thêm từ khóa (ví dụ: Thuyết Trình, Westminster, Ca Trù)"
-                className="flex-1 text-xs bg-white border border-stone-300 rounded-lg px-3 py-1.5 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#800020]"
+                className="flex-1 text-xs bg-white border border-stone-300 rounded-lg px-3 py-1.5 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394]"
               />
               <button
                 type="button"
@@ -261,7 +261,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#800020] hover:bg-[#6b001a] disabled:opacity-50 rounded-lg shadow-sm transition active:scale-95"
+              className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#0b5394] hover:bg-[#084175] disabled:opacity-50 rounded-lg shadow-sm transition active:scale-95"
             >
               {saving ? (
                 <>

@@ -18,8 +18,8 @@ export const AboutSection: React.FC = () => {
   return (
     <div className="space-y-8 pb-12">
       {/* Masthead */}
-      <div className="relative overflow-hidden bg-linear-to-r from-[#800020] via-[#8b1538] to-[#580d23] rounded-2xl p-8 text-white shadow-xl border border-[#9f2244]">
-        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-25 mix-blend-screen pointer-events-none" />
+      <div className="relative overflow-hidden bg-linear-to-r from-[#0b5394] via-[#094277] to-[#072d54] rounded-2xl p-8 text-white shadow-xl border border-[#1b6ab3]">
+        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 max-w-5xl">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30 text-xs font-semibold uppercase mb-3">
@@ -32,7 +32,7 @@ export const AboutSection: React.FC = () => {
             <p className="text-base font-medium text-amber-200 uppercase tracking-wider mb-4">
               INSTITUTE OF VIETNAMESE STUDIES &bull; WESTMINSTER, CALIFORNIA
             </p>
-            <p className="text-sm sm:text-base text-rose-100 leading-relaxed italic">
+            <p className="text-sm sm:text-base text-amber-100 leading-relaxed italic">
               &ldquo;Viện Việt Học là một tổ chức nghiên cứu và giáo dục bất vụ lợi, hướng tới mục tiêu giữ gìn và thắp sáng ngọn lửa văn hóa, lịch sử và ngôn ngữ dân tộc Việt Nam cho các thế hệ hôm nay và mai sau.&rdquo;
             </p>
           </div>
@@ -57,26 +57,26 @@ export const AboutSection: React.FC = () => {
           </h2>
           <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#800020] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-[#0b5394] shrink-0 mt-0.5" />
               <span><strong>Thắt chặt tình tự dân tộc:</strong> Tạo nhịp cầu gắn kết thân hữu và chia sẻ tri thức giữa cộng đồng người Việt trên khắp thế giới.</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#800020] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-[#0b5394] shrink-0 mt-0.5" />
               <span><strong>Nghiên cứu & Khảo luận:</strong> Đánh giá một cách khoa học, khách quan và trung thực những giá trị nhân bản trong kho tàng văn hóa Việt Nam.</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#800020] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-[#0b5394] shrink-0 mt-0.5" />
               <span><strong>Đóng góp vào văn minh nhân loại:</strong> Giới thiệu những tinh hoa nghệ thuật, triết học và văn học Việt Nam đến bạn bè quốc tế.</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#800020] shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-4 h-4 text-[#0b5394] shrink-0 mt-0.5" />
               <span><strong>Phục vụ giới trẻ:</strong> Đào tạo ngôn ngữ và văn hóa cho thanh thiếu niên gốc Việt sinh ra và lớn lên ở hải ngoại.</span>
             </li>
           </ul>
         </div>
 
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
-          <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-sky-100 text-[#0b5394] flex items-center justify-center">
             <BookOpen className="w-6 h-6" />
           </div>
           <h2 className="text-lg font-bold text-slate-900 font-serif">
@@ -100,7 +100,7 @@ export const AboutSection: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-            <GraduationCap className="w-6 h-6 text-[#800020] mb-2" />
+            <GraduationCap className="w-6 h-6 text-[#0b5394] mb-2" />
             <h3 className="text-sm font-bold text-slate-900 mb-1">Giáo Dục & Huấn Luyện</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Các lớp học Tiếng Việt, Lịch sử, Văn phạm, Triết học Đông phương dành cho các cấp độ từ cơ bản đến nâng cao.
@@ -149,7 +149,7 @@ export const AboutSection: React.FC = () => {
           </div>
 
           <div className="p-4 rounded-xl bg-white border border-amber-200 text-xs text-slate-700 max-w-xs space-y-1.5">
-            <span className="font-bold text-[#800020] block">Giờ Mở Cửa Thư Viện:</span>
+            <span className="font-bold text-[#0b5394] block">Giờ Mở Cửa Thư Viện:</span>
             <p>Thứ Ba - Thứ Bảy: 10:00 AM - 5:00 PM</p>
             <p>Chủ Nhật & Thứ Hai: Nghỉ</p>
             <p className="text-[11px] text-slate-500 italic pt-1">Kính mời quý độc giả và học giả đến tham quan và tra cứu tài liệu.</p>

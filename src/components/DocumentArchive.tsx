@@ -203,8 +203,9 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner / Hero Overview */}
-      <div className="bg-linear-to-r from-[#800020] via-[#8b1538] to-[#580d23] rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-[#9f2244] relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative overflow-hidden bg-linear-to-r from-[#0b5394] via-[#094277] to-[#072d54] rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-[#1b6ab3]">
+        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none" />
+        <div className="absolute right-0 top-0 translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30 text-xs font-semibold mb-3">
@@ -215,26 +216,26 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
           <h1 className="text-2xl sm:text-3xl font-extrabold font-serif tracking-tight text-white mb-2">
             Kho Tài Liệu Toàn Văn Viện Việt Học
           </h1>
-          <p className="text-rose-100 text-xs sm:text-sm leading-relaxed mb-5">
+          <p className="text-amber-100 text-xs sm:text-sm leading-relaxed mb-5">
             Tìm kiếm tức thời trong toàn bộ kho tài liệu HTML và các ấn bản sách PDF. Từng câu chữ, thi phẩm, bản khảo cứu và văn kiện lịch sử đều được lập chỉ mục và có thể tra cứu khi ngoại tuyến.
           </p>
 
           {/* Quick Metrics */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block font-medium">Tổng Số Văn Kiện</span>
+              <span className="text-[11px] text-amber-200 block font-medium">Tổng Số Văn Kiện</span>
               <span className="text-lg font-bold text-white">{stats.totalDocs} tài liệu</span>
             </div>
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block font-medium">Số Từ Đã Chỉ Mục</span>
+              <span className="text-[11px] text-amber-200 block font-medium">Số Từ Đã Chỉ Mục</span>
               <span className="text-lg font-bold text-amber-300">{stats.totalWords.toLocaleString()} từ</span>
             </div>
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block font-medium">Ấn Bản PDF</span>
+              <span className="text-[11px] text-amber-200 block font-medium">Ấn Bản PDF</span>
               <span className="text-lg font-bold text-sky-300">{stats.pdfCount} ấn bản</span>
             </div>
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block font-medium">Tập Tin HTML</span>
+              <span className="text-[11px] text-amber-200 block font-medium">Tập Tin HTML</span>
               <span className="text-lg font-bold text-emerald-300">{stats.htmlCount} văn bản</span>
             </div>
           </div>
@@ -253,7 +254,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
               placeholder="Nhập từ khóa tìm kiếm (ví dụ: 'Nam Quốc Sơn Hà', 'Truyện Kiều', 'chữ Quốc Ngữ', 'Lý Thường Kiệt')..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-300 rounded-xl pl-10 pr-16 py-2.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#800020] transition"
+              className="w-full bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-300 rounded-xl pl-10 pr-16 py-2.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] transition"
             />
             {searchQuery && (
               <button
@@ -272,7 +273,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
               id="sort-selector"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-[#800020] cursor-pointer"
+              className="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-[#0b5394] cursor-pointer"
             >
               <option value="relevance">Sắp xếp: Độ liên quan</option>
               <option value="newest">Sắp xếp: Mới nhất</option>
@@ -284,7 +285,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
               <button
                 id="btn-upload-in-archive"
                 onClick={onOpenUpload}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#800020] hover:bg-[#6b001a] text-white text-xs font-semibold shadow-xs transition active:scale-95"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#0b5394] hover:bg-[#084175] text-white text-xs font-semibold shadow-xs transition active:scale-95"
               >
                 <FilePlus className="w-4 h-4 text-amber-300" />
                 <span>Tải Lên</span>
@@ -312,8 +313,8 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
               onClick={() => setSelectedType('pdf')}
               className={`px-2.5 py-1 rounded-lg font-semibold transition ${
                 selectedType === 'pdf'
-                  ? 'bg-rose-700 text-white'
-                  : 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200'
+                  ? 'bg-amber-700 text-white'
+                  : 'bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-200'
               }`}
             >
               PDF ({stats.pdfCount})
@@ -355,7 +356,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
         <div>
           {searchQuery ? (
             <span>
-              Tìm thấy <strong className="text-[#800020] font-bold">{filteredDocuments.length}</strong> kết quả cho từ khóa &ldquo;{searchQuery}&rdquo;
+              Tìm thấy <strong className="text-[#0b5394] font-bold">{filteredDocuments.length}</strong> kết quả cho từ khóa &ldquo;{searchQuery}&rdquo;
             </span>
           ) : (
             <span>Hiển thị <strong className="text-slate-800 font-bold">{filteredDocuments.length}</strong> tài liệu trong kho thư viện</span>
@@ -365,7 +366,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
         {/* Reload seed archive button */}
         <button
           onClick={onLoadSeedArchives}
-          className="inline-flex items-center gap-1 text-[11px] text-slate-500 hover:text-[#800020] transition"
+          className="inline-flex items-center gap-1 text-[11px] text-slate-500 hover:text-[#0b5394] transition"
           title="Tải lại kho dữ liệu mẫu của Viện Việt Học"
         >
           <RefreshCw className="w-3 h-3" />
@@ -389,7 +390,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
                     <span
                       className={`px-2 py-0.5 rounded-md text-[10px] uppercase font-bold tracking-wider ${
                         doc.fileType === 'pdf'
-                          ? 'bg-rose-100 text-rose-700 border border-rose-200'
+                          ? 'bg-amber-100 text-amber-800 border border-amber-200'
                           : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
                       }`}
                     >
@@ -406,7 +407,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#800020] transition line-clamp-2 leading-snug mb-2 font-serif">
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 leading-snug mb-2 font-serif">
                   {doc.title}
                 </h3>
 
@@ -475,7 +476,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
 
                   <button
                     onClick={() => onOpenDocument(doc, searchQuery)}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#800020] hover:bg-[#6b001a] text-white font-semibold text-xs transition"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0b5394] hover:bg-[#084175] text-white font-semibold text-xs transition"
                   >
                     <span>Xem</span>
                     <ExternalLink className="w-3 h-3" />

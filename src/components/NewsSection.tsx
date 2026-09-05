@@ -68,8 +68,9 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-linear-to-r from-[#800020] via-[#8b1538] to-[#580d23] rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-[#9f2244] flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="max-w-2xl">
+      <div className="relative overflow-hidden bg-linear-to-r from-[#0b5394] via-[#094277] to-[#072d54] rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-[#1b6ab3] flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none" />
+        <div className="relative z-10 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30 text-xs font-semibold mb-3">
             <Newspaper className="w-3.5 h-3.5" />
             <span>Sinh Hoạt & Tin Tức Học Thuật</span>
@@ -77,7 +78,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
           <h1 className="text-2xl sm:text-3xl font-extrabold font-serif tracking-tight text-white mb-2">
             Tin Tức & Thông Báo Viện Việt Học
           </h1>
-          <p className="text-rose-100 text-xs sm:text-sm leading-relaxed">
+          <p className="text-amber-100 text-xs sm:text-sm leading-relaxed">
             Cập nhật lịch thuyết trình văn hóa hàng tháng, các công trình khảo cứu mới, hoạt động thư viện và thông tin sinh hoạt của Viện Việt Học tại Westminster, California.
           </p>
         </div>
@@ -100,7 +101,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
           onClick={() => setSelectedCategory('all')}
           className={`px-3 py-1.5 rounded-xl font-semibold transition ${
             selectedCategory === 'all'
-              ? 'bg-[#800020] text-white shadow-xs'
+              ? 'bg-[#0b5394] text-white shadow-xs'
               : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
           }`}
         >
@@ -114,7 +115,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1.5 rounded-xl font-medium transition ${
                 selectedCategory === cat
-                  ? 'bg-[#800020] text-white shadow-xs'
+                  ? 'bg-[#0b5394] text-white shadow-xs'
                   : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >
@@ -144,7 +145,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
                   </div>
                 </div>
 
-                <h2 className="text-base font-bold text-slate-900 group-hover:text-[#800020] transition line-clamp-2 leading-snug mb-2 font-serif">
+                <h2 className="text-base font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 leading-snug mb-2 font-serif">
                   {article.title}
                 </h2>
 
@@ -183,7 +184,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     )}
-                    <span className="text-[#800020] font-semibold text-xs group-hover:underline flex items-center gap-1">
+                    <span className="text-[#0b5394] font-semibold text-xs group-hover:underline flex items-center gap-1">
                       <span>Đọc tiếp</span>
                       <ArrowRight className="w-3 h-3" />
                     </span>

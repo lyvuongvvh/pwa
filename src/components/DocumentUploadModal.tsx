@@ -197,16 +197,16 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
         className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-stone-200 overflow-hidden my-6"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#1e2024] text-white border-b border-stone-800">
+        <div className="flex items-center justify-between px-6 py-4 bg-[#0f2b48] text-white border-b border-sky-950">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-[#800020] to-[#b91c1c] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-[#0b5394] to-[#072d54] flex items-center justify-center">
               <Upload className="w-4 h-4 text-amber-200" />
             </div>
             <div>
               <h2 className="text-base font-bold text-white font-serif">
                 Tải Lên & Số Hóa Văn Kiện
               </h2>
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-sky-200">
                 Tự động trích xuất toàn văn HTML/PDF và lập chỉ mục tra cứu
               </p>
             </div>
@@ -222,8 +222,8 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {error && (
-            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 mt-0.5" />
+            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
+              <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
@@ -257,7 +257,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
 
               {parsing ? (
                 <div className="flex flex-col items-center py-2">
-                  <Loader2 className="w-7 h-7 text-[#800020] animate-spin mb-2" />
+                  <Loader2 className="w-7 h-7 text-[#0b5394] animate-spin mb-2" />
                   <span className="text-xs font-semibold text-stone-700">
                     Đang trích xuất toàn văn và lập chỉ mục nội dung...
                   </span>
@@ -276,11 +276,11 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
                 </div>
               ) : (
                 <>
-                  <div className="p-3 rounded-full bg-stone-200/60 text-[#800020] mb-2">
+                  <div className="p-3 rounded-full bg-stone-200/60 text-[#0b5394] mb-2">
                     <Upload className="w-5 h-5" />
                   </div>
                   <p className="text-xs font-medium text-stone-700 mb-0.5">
-                    Kéo và thả tập tin vào đây, hoặc <span className="text-[#800020] font-semibold underline">duyệt từ máy</span>
+                    Kéo và thả tập tin vào đây, hoặc <span className="text-[#0b5394] font-semibold underline">duyệt từ máy</span>
                   </p>
                   <p className="text-[11px] text-stone-400">Hỗ trợ các định dạng .html, .htm, .pdf, .txt</p>
                 </>
@@ -300,7 +300,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Ví dụ: Đoạn Trường Tân Thanh - Khảo Luận Thi Pháp"
                 required
-                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#800020]"
+                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394]"
               />
             </div>
             <div>
@@ -308,7 +308,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#800020] cursor-pointer"
+                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#0b5394] cursor-pointer"
               >
                 {CATEGORIES.map((cat) => (
                   <option key={cat} value={cat}>
@@ -329,7 +329,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
               placeholder="Tóm tắt ngắn gọn bối cảnh lịch sử, nội dung cốt lõi hoặc ý nghĩa của tài liệu..."
-              className="w-full text-xs bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#800020] leading-relaxed"
+              className="w-full text-xs bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] leading-relaxed"
             />
           </div>
 
@@ -348,7 +348,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
                   }
                 }}
                 placeholder="Thêm từ khóa (ví dụ: Lịch sử, Thời Lý, Chữ Nôm)"
-                className="flex-1 text-xs bg-white border border-stone-300 rounded-lg px-3 py-1.5 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#800020]"
+                className="flex-1 text-xs bg-white border border-stone-300 rounded-lg px-3 py-1.5 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#0b5394]"
               />
               <button
                 type="button"
@@ -391,7 +391,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
             <button
               type="submit"
               disabled={!file || saving || parsing}
-              className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#800020] hover:bg-[#6b001a] disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-sm transition active:scale-95"
+              className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#0b5394] hover:bg-[#084175] disabled:opacity-50 disabled:cursor-not-allowed rounded-lg shadow-sm transition active:scale-95"
             >
               {saving ? (
                 <>

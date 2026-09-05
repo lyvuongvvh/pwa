@@ -120,8 +120,8 @@ export const RoleManagementModal: React.FC<RoleManagementModalProps> = ({
             </div>
           )}
           {errorMsg && (
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+            <div className="flex items-center gap-2 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs">
+              <AlertCircle className="w-4 h-4 text-amber-700 shrink-0" />
               <span>{errorMsg}</span>
             </div>
           )}
@@ -138,22 +138,22 @@ export const RoleManagementModal: React.FC<RoleManagementModalProps> = ({
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900 mb-1">
-                <Edit3 className="w-4 h-4 text-[#800020]" />
+            <div className="p-3.5 rounded-xl bg-sky-50 border border-sky-200">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-sky-950 mb-1">
+                <Edit3 className="w-4 h-4 text-[#0b5394]" />
                 <span>Biên Tập Viên (Editor)</span>
               </div>
-              <p className="text-[11px] text-amber-900/80 leading-relaxed">
+              <p className="text-[11px] text-sky-900/80 leading-relaxed">
                 Toàn quyền Độc giả + Tải lên văn kiện HTML & PDF, tự động trích xuất nội dung và đăng tin tức/thông báo mới.
               </p>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-rose-900 mb-1">
-                <ShieldCheck className="w-4 h-4 text-rose-700" />
+            <div className="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-950 mb-1">
+                <ShieldCheck className="w-4 h-4 text-indigo-700" />
                 <span>Quản Trị Viên (Admin)</span>
               </div>
-              <p className="text-[11px] text-rose-900/80 leading-relaxed">
+              <p className="text-[11px] text-indigo-900/80 leading-relaxed">
                 Toàn quyền Biên tập viên + Thiết lập phân quyền người dùng, quản lý tài khoản và xóa văn kiện/bài viết.
               </p>
             </div>
@@ -210,9 +210,9 @@ export const RoleManagementModal: React.FC<RoleManagementModalProps> = ({
                               className={`px-3 py-1 text-xs font-semibold rounded-md transition ${
                                 u.role === r
                                   ? r === 'admin'
-                                    ? 'bg-rose-700 text-white shadow-xs'
+                                    ? 'bg-indigo-800 text-white shadow-xs'
                                     : r === 'editor'
-                                    ? 'bg-[#800020] text-white shadow-xs'
+                                    ? 'bg-[#0b5394] text-white shadow-xs'
                                     : 'bg-stone-800 text-white shadow-xs'
                                   : 'text-stone-600 hover:text-stone-900'
                               }`}

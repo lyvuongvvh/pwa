@@ -80,12 +80,12 @@ export const FrontPage: React.FC<FrontPageProps> = ({
   return (
     <div className="space-y-10 pb-12">
       {/* 1. Viện Việt Học Masthead & Cultural Banner */}
-      <section className="relative overflow-hidden rounded-2xl bg-linear-to-b from-[#800020] via-[#8b1538] to-[#580d23] text-white shadow-xl border border-[#9f2244]">
+      <section className="relative overflow-hidden rounded-2xl bg-linear-to-b from-[#0b5394] via-[#094277] to-[#072d54] text-white shadow-xl border border-[#1b6ab3]">
         {/* Authentic viethoc.com banner motif */}
-        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-25 mix-blend-screen pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('/viethoc-header-bg.png')] bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none" />
         {/* Subtle decorative heritage patterns */}
-        <div className="absolute -right-16 -bottom-16 w-80 h-80 rounded-full bg-amber-400/10 blur-3xl pointer-events-none" />
-        <div className="absolute left-1/4 -top-20 w-72 h-72 rounded-full bg-rose-500/10 blur-2xl pointer-events-none" />
+        <div className="absolute -right-16 -bottom-16 w-80 h-80 rounded-full bg-amber-400/15 blur-3xl pointer-events-none" />
+        <div className="absolute left-1/4 -top-20 w-72 h-72 rounded-full bg-sky-400/10 blur-2xl pointer-events-none" />
 
         <div className="relative z-10 px-6 py-10 sm:px-10 sm:py-14 max-w-5xl mx-auto text-center">
           {/* Official Emblem Logo from viethoc.com */}
@@ -111,7 +111,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
             INSTITUTE OF VIETNAMESE STUDIES
           </p>
           <div className="w-24 h-0.5 bg-amber-400 mx-auto my-3" />
-          <p className="text-sm sm:text-base text-rose-100 max-w-2xl mx-auto leading-relaxed italic mb-8">
+          <p className="text-sm sm:text-base text-amber-100 max-w-2xl mx-auto leading-relaxed italic mb-8">
             &ldquo;Bảo tồn và phát huy di sản văn hóa, tư tưởng, ngôn ngữ và lịch sử dân tộc Việt Nam&rdquo;
           </p>
 
@@ -132,7 +132,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
               <button
                 type="submit"
                 id="btn-frontpage-search-submit"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#800020] hover:bg-[#6b001a] text-white text-xs sm:text-sm font-semibold transition active:scale-95 shadow-md"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0b5394] hover:bg-[#084175] text-white text-xs sm:text-sm font-semibold transition active:scale-95 shadow-md"
               >
                 <Search className="w-4 h-4" />
                 <span>Tìm Kiếm</span>
@@ -158,19 +158,19 @@ export const FrontPage: React.FC<FrontPageProps> = ({
           {/* Metrics summary bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mt-8 text-left">
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block">Tài Liệu Số Hóa</span>
+              <span className="text-[11px] text-amber-200 block">Tài Liệu Số Hóa</span>
               <span className="text-xl font-bold text-white">{documents.length} văn kiện</span>
             </div>
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block">Từ Khóa Toàn Văn</span>
+              <span className="text-[11px] text-amber-200 block">Từ Khóa Toàn Văn</span>
               <span className="text-xl font-bold text-amber-300">{totalWords.toLocaleString()} từ</span>
             </div>
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block">Tài Liệu PDF & HTML</span>
+              <span className="text-[11px] text-amber-200 block">Tài Liệu PDF & HTML</span>
               <span className="text-xl font-bold text-sky-300">{pdfCount} PDF / {htmlCount} HTML</span>
             </div>
             <div className="bg-black/25 backdrop-blur-xs border border-white/15 rounded-xl p-3">
-              <span className="text-[11px] text-rose-200 block">Khả Năng Ngoại Tuyến</span>
+              <span className="text-[11px] text-amber-200 block">Khả Năng Ngoại Tuyến</span>
               <span className="text-xl font-bold text-emerald-300">PWA Offline</span>
             </div>
           </div>
@@ -181,10 +181,10 @@ export const FrontPage: React.FC<FrontPageProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Sinh Hoạt & Tin Tức Mới Nhất (7 Cols) */}
         <section className="lg:col-span-7 space-y-5">
-          <div className="flex items-center justify-between border-b-2 border-[#800020] pb-2.5">
+          <div className="flex items-center justify-between border-b-2 border-[#0b5394] pb-2.5">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#800020] text-white flex items-center justify-center shadow-xs">
-                <Newspaper className="w-4 h-4" />
+              <div className="w-8 h-8 rounded-lg bg-[#0b5394] text-white flex items-center justify-center shadow-xs">
+                <Newspaper className="w-4 h-4 text-amber-200" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-slate-900 tracking-tight">
@@ -196,7 +196,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
 
             <button
               onClick={() => onNavigateTab('articles')}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-[#800020] hover:text-[#580d23] hover:underline"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-[#0b5394] hover:text-[#062c52] hover:underline"
             >
               <span>Xem tất cả</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -225,7 +225,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#800020] transition line-clamp-2 mb-2 leading-snug">
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 mb-2 leading-snug">
                   {article.title}
                 </h3>
 
@@ -233,7 +233,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                   {article.excerpt}
                 </p>
 
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-[#800020] font-semibold group-hover:underline">
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-[#0b5394] font-semibold group-hover:underline">
                   <span>Đọc tiếp chi tiết</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
@@ -250,7 +250,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
               </div>
               <button
                 onClick={onOpenNewArticle}
-                className="shrink-0 px-3 py-1.5 rounded-lg bg-[#800020] hover:bg-[#6b001a] text-white text-xs font-semibold shadow-xs"
+                className="shrink-0 px-3 py-1.5 rounded-lg bg-[#0b5394] hover:bg-[#084175] text-white text-xs font-semibold shadow-xs"
               >
                 Đăng Bài Viết
               </button>
@@ -293,7 +293,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                   <div
                     className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
                       doc.fileType === 'pdf'
-                        ? 'bg-rose-100 text-rose-700 border border-rose-200'
+                        ? 'bg-amber-100 text-amber-800 border border-amber-200'
                         : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
                     }`}
                   >
@@ -314,7 +314,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                       </span>
                     </div>
 
-                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#800020] transition line-clamp-2 leading-snug">
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 leading-snug">
                       {doc.title}
                     </h4>
 
@@ -323,7 +323,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                       <span>&bull;</span>
                       <span>{(doc.wordCount || 0).toLocaleString()} từ</span>
                       <span>&bull;</span>
-                      <span className="text-[#800020] font-semibold group-hover:underline">Đọc toàn văn</span>
+                      <span className="text-[#0b5394] font-semibold group-hover:underline">Đọc toàn văn</span>
                     </div>
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                   onNavigateTab('documents');
                 }
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#800020] hover:bg-[#6b001a] text-white text-xs font-semibold transition"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0b5394] hover:bg-[#084175] text-white text-xs font-semibold transition"
             >
               <span>{isEditor ? 'Tải Lên Văn Kiện (PDF/HTML)' : 'Khám Phá Toàn Bộ Kho Thư Viện'}</span>
             </button>
@@ -370,7 +370,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
             <div className="w-9 h-9 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
               <History className="w-5 h-5" />
             </div>
-            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#800020] mb-1">
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0b5394] mb-1">
               Lịch Sử & Cổ Sử Dân Tộc
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
@@ -380,12 +380,12 @@ export const FrontPage: React.FC<FrontPageProps> = ({
 
           <div
             onClick={() => handleQuickKeyword('Văn học')}
-            className="p-4 rounded-xl bg-slate-50 hover:bg-rose-50/70 border border-slate-200 hover:border-rose-300 transition cursor-pointer group"
+            className="p-4 rounded-xl bg-slate-50 hover:bg-sky-50/70 border border-slate-200 hover:border-sky-300 transition cursor-pointer group"
           >
-            <div className="w-9 h-9 rounded-lg bg-rose-100 text-rose-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-lg bg-sky-100 text-sky-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
               <BookOpen className="w-5 h-5" />
             </div>
-            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#800020] mb-1">
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0b5394] mb-1">
               Văn Học & Nghệ Thuật
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
@@ -395,12 +395,12 @@ export const FrontPage: React.FC<FrontPageProps> = ({
 
           <div
             onClick={() => handleQuickKeyword('Ngôn ngữ')}
-            className="p-4 rounded-xl bg-slate-50 hover:bg-sky-50/70 border border-slate-200 hover:border-sky-300 transition cursor-pointer group"
+            className="p-4 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-200 hover:border-indigo-300 transition cursor-pointer group"
           >
-            <div className="w-9 h-9 rounded-lg bg-sky-100 text-sky-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
               <Languages className="w-5 h-5" />
             </div>
-            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#800020] mb-1">
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0b5394] mb-1">
               Ngôn Ngữ & Chữ Viết
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
@@ -415,7 +415,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
             <div className="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
               <GraduationCap className="w-5 h-5" />
             </div>
-            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#800020] mb-1">
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0b5394] mb-1">
               Triết Học & Tư Tưởng
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
@@ -425,12 +425,12 @@ export const FrontPage: React.FC<FrontPageProps> = ({
 
           <div
             onClick={() => handleQuickKeyword('Tư liệu')}
-            className="p-4 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-200 hover:border-indigo-300 transition cursor-pointer group"
+            className="p-4 rounded-xl bg-slate-50 hover:bg-amber-50/70 border border-slate-200 hover:border-amber-300 transition cursor-pointer group"
           >
-            <div className="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
               <FileText className="w-5 h-5" />
             </div>
-            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#800020] mb-1">
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0b5394] mb-1">
               Tư Liệu & Bản Thảo Cổ
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
@@ -440,12 +440,12 @@ export const FrontPage: React.FC<FrontPageProps> = ({
 
           <div
             onClick={() => handleQuickKeyword('Viện Việt Học')}
-            className="p-4 rounded-xl bg-slate-50 hover:bg-amber-50/70 border border-slate-200 hover:border-amber-300 transition cursor-pointer group"
+            className="p-4 rounded-xl bg-slate-50 hover:bg-sky-50/70 border border-slate-200 hover:border-sky-300 transition cursor-pointer group"
           >
-            <div className="w-9 h-9 rounded-lg bg-amber-200 text-amber-900 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-lg bg-sky-100 text-sky-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
               <Building className="w-5 h-5" />
             </div>
-            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#800020] mb-1">
+            <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#0b5394] mb-1">
               Thư Viện & Kỷ Yếu Viện
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
@@ -489,7 +489,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
             </button>
             <button
               onClick={() => onNavigateTab('documents')}
-              className="px-4 py-2.5 rounded-xl bg-[#800020] hover:bg-[#6b001a] text-white text-xs font-semibold shadow-xs transition"
+              className="px-4 py-2.5 rounded-xl bg-[#0b5394] hover:bg-[#084175] text-white text-xs font-semibold shadow-xs transition"
             >
               Vào Kho Tài Liệu
             </button>

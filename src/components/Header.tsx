@@ -126,7 +126,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => setActiveTab('home')}
               className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition ${
                 activeTab === 'home'
-                  ? 'bg-[#800020] text-amber-200 font-semibold shadow-xs'
+                  ? 'bg-[#0b5394] text-amber-200 font-semibold shadow-xs'
                   : 'text-stone-300 hover:text-white hover:bg-stone-800'
               }`}
             >
@@ -138,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => setActiveTab('documents')}
               className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition ${
                 activeTab === 'documents'
-                  ? 'bg-[#800020] text-amber-200 font-semibold shadow-xs'
+                  ? 'bg-[#0b5394] text-amber-200 font-semibold shadow-xs'
                   : 'text-stone-300 hover:text-white hover:bg-stone-800'
               }`}
             >
@@ -151,7 +151,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => setActiveTab('articles')}
               className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition ${
                 activeTab === 'articles'
-                  ? 'bg-[#800020] text-amber-200 font-semibold shadow-xs'
+                  ? 'bg-[#0b5394] text-amber-200 font-semibold shadow-xs'
                   : 'text-stone-300 hover:text-white hover:bg-stone-800'
               }`}
             >
@@ -165,7 +165,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => setActiveTab('about')}
               className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition ${
                 activeTab === 'about'
-                  ? 'bg-[#800020] text-amber-200 font-semibold shadow-xs'
+                  ? 'bg-[#0b5394] text-amber-200 font-semibold shadow-xs'
                   : 'text-stone-300 hover:text-white hover:bg-stone-800'
               }`}
             >
@@ -178,7 +178,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 id="btn-upload-doc-header"
                 onClick={onOpenUpload}
-                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#800020] hover:bg-[#6b001a] text-white transition shadow-xs"
+                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#0b5394] hover:bg-[#084175] text-white transition shadow-xs"
                 title="Tải lên tài liệu HTML hoặc PDF mới"
               >
                 <Upload className="w-3.5 h-3.5 text-amber-300" />
