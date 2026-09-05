@@ -82,13 +82,11 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-3 shrink-0 text-left cursor-pointer group"
             title="Viện Việt Học - Trang Chủ"
           >
-            <div className="h-11 px-1.5 py-1 rounded-xl bg-white/95 border border-amber-400/50 flex items-center justify-center shadow-md group-hover:scale-102 transition-transform">
-              <img
-                src="/viethoc-logo.jpg"
-                alt="Viện Việt Học"
-                className="h-full w-auto object-contain"
-              />
-            </div>
+            <img
+              src="/viethoc-logo.jpg"
+              alt="Viện Việt Học"
+              className="h-11 w-auto object-contain group-hover:scale-105 transition-transform"
+            />
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-base tracking-tight text-white font-serif hidden sm:inline drop-shadow-md">

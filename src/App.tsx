@@ -302,13 +302,11 @@ function AppContent() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-white/15">
             <div className="flex items-center gap-3.5">
-              <div className="h-12 px-2 py-1 rounded-xl bg-white/95 border border-amber-400/40 flex items-center justify-center shadow-md">
-                <img
-                  src="/viethoc-logo.jpg"
-                  alt="Viện Việt Học Logo"
-                  className="h-full w-auto object-contain"
-                />
-              </div>
+              <img
+                src="/viethoc-logo.jpg"
+                alt="Viện Việt Học Logo"
+                className="h-11 w-auto object-contain"
+              />
               <div>
                 <h3 className="text-sm font-extrabold text-white tracking-wide font-serif">
                   VIỆN VIỆT HỌC &bull; INSTITUTE OF VIETNAMESE STUDIES
