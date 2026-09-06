@@ -52,8 +52,19 @@ function AppContent() {
   const [highlightTerm, setHighlightTerm] = useState<string>('');
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isNewArticleOpen, setIsNewArticleOpen] = useState(false);
+  const [articleToEdit, setArticleToEdit] = useState<ArticleItem | null>(null);
   const [isRoleManagerOpen, setIsRoleManagerOpen] = useState(false);
   const [selectedArticleExternal, setSelectedArticleExternal] = useState<ArticleItem | null>(null);
+
+  const handleOpenNewArticle = () => {
+    setArticleToEdit(null);
+    setIsNewArticleOpen(true);
+  };
+
+  const handleEditArticle = (article: ArticleItem) => {
+    setArticleToEdit(article);
+    setIsNewArticleOpen(true);
+  };
 
   // Sync Documents with Firestore (and cache in localStorage for PWA offline operation)
   useEffect(() => {
@@ -127,7 +138,10 @@ function AppContent() {
 
   const handleArticleCreated = (newArticle: ArticleItem) => {
     setArticles((prev) => {
-      const updated = [newArticle, ...prev];
+      const exists = prev.some((a) => a.id === newArticle.id);
+      const updated = exists
+        ? prev.map((a) => (a.id === newArticle.id ? newArticle : a))
+        : [newArticle, ...prev];
       try {
         localStorage.setItem(STORAGE_ARTICLES_KEY, JSON.stringify(updated));
       } catch {}
@@ -225,7 +239,7 @@ function AppContent() {
             onNavigateTab={setActiveTab}
             onOpenDocument={handleOpenDocument}
             onOpenUpload={() => setIsUploadOpen(true)}
-            onOpenNewArticle={() => setIsNewArticleOpen(true)}
+            onOpenNewArticle={handleOpenNewArticle}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             onSelectArticle={handleSelectArticleFromFrontPage}
@@ -247,7 +261,8 @@ function AppContent() {
         {activeTab === 'articles' && (
           <NewsSection
             articles={articles}
-            onOpenNewArticle={() => setIsNewArticleOpen(true)}
+            onOpenNewArticle={handleOpenNewArticle}
+            onEditArticle={handleEditArticle}
             onDeleteArticle={handleDeleteArticle}
             selectedArticleExternal={selectedArticleExternal}
             onClearSelectedArticleExternal={() => setSelectedArticleExternal(null)}
@@ -277,7 +292,11 @@ function AppContent() {
       {isNewArticleOpen && (
         <ArticleEditorModal
           isOpen={isNewArticleOpen}
-          onClose={() => setIsNewArticleOpen(false)}
+          initialArticle={articleToEdit}
+          onClose={() => {
+            setIsNewArticleOpen(false);
+            setArticleToEdit(null);
+          }}
           onArticleCreated={handleArticleCreated}
         />
       )}

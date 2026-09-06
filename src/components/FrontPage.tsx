@@ -204,7 +204,10 @@ export const FrontPage: React.FC<FrontPageProps> = ({
           </div>
 
           <div className="space-y-4">
-            {articles.slice(0, 3).map((article) => (
+            {articles
+              .filter((a) => a.published !== false)
+              .slice(0, 3)
+              .map((article) => (
               <article
                 key={article.id}
                 onClick={() => onSelectArticle(article)}
@@ -243,17 +246,34 @@ export const FrontPage: React.FC<FrontPageProps> = ({
 
           {/* Quick Action for Editors */}
           {isEditor && (
-            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center justify-between gap-3">
+            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
                 <span className="text-xs font-bold text-amber-900 block">Quyền Biên Tập Viên</span>
-                <span className="text-xs text-amber-700">Đăng thông báo sinh hoạt hoặc bài nghiên cứu mới vào cổng Viện Việt Học.</span>
+                <span className="text-xs text-amber-700">
+                  Đăng thông báo sinh hoạt hoặc bài nghiên cứu mới vào cổng Viện Việt Học.
+                  {articles.filter((a) => a.published === false).length > 0 && (
+                    <span className="ml-1 font-semibold text-amber-900">
+                      (Có {articles.filter((a) => a.published === false).length} bản nháp đang lưu)
+                    </span>
+                  )}
+                </span>
               </div>
-              <button
-                onClick={onOpenNewArticle}
-                className="shrink-0 px-3 py-1.5 rounded-lg bg-[#0b5394] hover:bg-[#084175] text-white text-xs font-semibold shadow-xs"
-              >
-                Đăng Bài Viết
-              </button>
+              <div className="flex items-center gap-2 shrink-0">
+                {articles.filter((a) => a.published === false).length > 0 && (
+                  <button
+                    onClick={() => onNavigateTab('articles')}
+                    className="px-3 py-1.5 rounded-lg bg-amber-200 hover:bg-amber-300 text-amber-950 text-xs font-semibold transition"
+                  >
+                    Xem Bản Nháp ({articles.filter((a) => a.published === false).length})
+                  </button>
+                )}
+                <button
+                  onClick={onOpenNewArticle}
+                  className="shrink-0 px-3 py-1.5 rounded-lg bg-[#0b5394] hover:bg-[#084175] text-white text-xs font-semibold shadow-xs"
+                >
+                  Đăng Bài Viết
+                </button>
+              </div>
             </div>
           )}
         </section>

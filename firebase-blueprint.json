@@ -183,8 +183,8 @@
           "description": "Author display name"
         },
         "published": {
-          "type": "string",
-          "description": "Publication state flag string (e.g. 'true' or 'false')"
+          "type": "boolean",
+          "description": "Publication state: true for published, false for working draft"
         },
         "createdAt": {
           "type": "string",
