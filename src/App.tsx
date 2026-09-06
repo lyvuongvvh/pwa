@@ -40,7 +40,19 @@ function AppContent() {
   const [articles, setArticles] = useState<ArticleItem[]>(() => {
     try {
       const cached = localStorage.getItem(STORAGE_ARTICLES_KEY);
-      if (cached) return JSON.parse(cached);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const map = new Map<string, ArticleItem>();
+          INITIAL_ARTICLES.forEach((art) => map.set(art.id, art));
+          parsed.forEach((art: ArticleItem) => {
+            if (!map.has(art.id)) {
+              map.set(art.id, art);
+            }
+          });
+          return Array.from(map.values());
+        }
+      }
     } catch {
       // Fallback to seed data
     }

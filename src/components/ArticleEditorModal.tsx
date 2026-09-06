@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { ArticleItem } from '../types';
 import { extractSearchTokens } from '../utils/fileParser';
+import { ArticleRenderer } from './ArticleRenderer';
 import {
   X,
   PlusCircle,
@@ -13,7 +14,9 @@ import {
   RotateCcw,
   Clock,
   Save,
-  ArchiveRestore
+  ArchiveRestore,
+  Eye,
+  Edit3
 } from 'lucide-react';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -58,6 +61,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [hasAutosavePrompt, setHasAutosavePrompt] = useState(false);
   const [autosaveTime, setAutosaveTime] = useState<string | null>(null);
+  const [editorTab, setEditorTab] = useState<'edit' | 'preview'>('edit');
 
   // Sync state if initialArticle changes
   useEffect(() => {
@@ -310,7 +314,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Ví dụ: Thông Báo Buổi Thuyết Trình Học Thuật Thứ Bảy"
-                className="w-full text-xs bg-white border border-stone-300 rounded-lg px-3 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394]"
+                className="w-full text-sm sm:text-base font-serif font-bold bg-white border border-stone-300 rounded-lg px-3.5 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394]"
               />
             </div>
             <div>
@@ -339,27 +343,73 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
               placeholder="Đoạn mở đầu ngắn gọn để độc giả nắm bắt nhanh nội dung..."
-              className="w-full text-xs bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] leading-relaxed"
+              className="w-full text-xs sm:text-sm font-sans bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] leading-relaxed"
             />
           </div>
 
-          {/* Full Content */}
+          {/* Full Content with Live Preview Tab */}
           <div>
-            <div className="flex items-center justify-between mb-1">
+            <div className="flex items-center justify-between mb-1.5">
               <label className="block text-xs font-semibold text-stone-800">
                 Nội Dung Toàn Văn <span className="text-amber-600">*</span>
               </label>
-              <span className="text-[11px] text-stone-400">
-                Hỗ trợ văn bản thuần hoặc ghi chú định dạng
-              </span>
+
+              {/* Edit / Preview Tabs */}
+              <div className="inline-flex rounded-lg border border-stone-300 bg-stone-100 p-0.5 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setEditorTab('edit')}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md transition ${
+                    editorTab === 'edit'
+                      ? 'bg-white text-stone-900 font-semibold shadow-2xs'
+                      : 'text-stone-600 hover:text-stone-900'
+                  }`}
+                >
+                  <Edit3 className="w-3 h-3 text-[#0b5394]" />
+                  <span>Soạn Thảo</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEditorTab('preview')}
+                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md transition ${
+                    editorTab === 'preview'
+                      ? 'bg-white text-stone-900 font-semibold shadow-2xs'
+                      : 'text-stone-600 hover:text-stone-900'
+                  }`}
+                >
+                  <Eye className="w-3 h-3 text-amber-700" />
+                  <span>Xem Trước Phông Chữ</span>
+                </button>
+              </div>
             </div>
-            <textarea
-              rows={8}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Nhập toàn văn bài viết, khảo luận hoặc chi tiết thông báo..."
-              className="w-full text-xs font-mono bg-white border border-stone-300 rounded-lg p-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] leading-relaxed"
-            />
+
+            {editorTab === 'edit' ? (
+              <textarea
+                rows={9}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Nhập toàn văn bài viết, khảo luận hoặc chi tiết thông báo..."
+                className="w-full text-sm font-sans bg-white border border-stone-300 rounded-lg p-3.5 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394] leading-relaxed"
+              />
+            ) : (
+              <div className="p-4 sm:p-5 rounded-xl border border-stone-300 bg-stone-50 min-h-[220px] max-h-[350px] overflow-y-auto">
+                <div className="mb-4 pb-3 border-b border-stone-200">
+                  <h3 className="vn-article-title text-lg font-bold font-serif text-slate-900 mb-2">
+                    {title || '(Chưa có tiêu đề)'}
+                  </h3>
+                  {excerpt && (
+                    <div className="vn-article-lead text-xs sm:text-sm font-serif italic text-amber-950 bg-amber-100/50 p-3 rounded-lg border border-amber-200/60 leading-relaxed mb-2">
+                      {excerpt}
+                    </div>
+                  )}
+                </div>
+                {content ? (
+                  <ArticleRenderer content={content} showControls={false} />
+                ) : (
+                  <p className="text-xs text-stone-400 italic">Chưa có nội dung để hiển thị xem trước...</p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Tags */}

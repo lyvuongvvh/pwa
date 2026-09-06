@@ -228,11 +228,11 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 mb-2 leading-snug">
+                <h3 className="vn-article-title text-base sm:text-lg font-bold font-serif text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 mb-2 leading-snug">
                   {article.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed mb-3">
+                <p className="text-xs sm:text-sm font-sans text-slate-600 line-clamp-2 leading-relaxed mb-3">
                   {article.excerpt}
                 </p>
 

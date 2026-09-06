@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', Cambria, serif;
+}
+
+:root {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Vietnamese typography adjustments for diacritics balance */
+body {
+  font-family: var(--font-sans);
+  color: #1e293b;
+  background-color: #f8fafc;
+  line-height: 1.65;
+}
+
+/* Academic and Literary Typography Classes */
+.vn-article-title {
+  font-family: var(--font-serif);
+  font-feature-settings: 'kern', 'liga', 'calt';
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+.vn-article-body {
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em;
+}
+
+.vn-article-lead {
+  font-family: var(--font-serif);
+  line-height: 1.7;
+}

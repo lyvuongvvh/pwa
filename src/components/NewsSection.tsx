@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArticleItem } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { ArticleRenderer } from './ArticleRenderer';
 import {
   Newspaper,
   PlusCircle,
@@ -223,11 +224,11 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
                     </div>
                   </div>
 
-                  <h2 className="text-base font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 leading-snug mb-2 font-serif">
+                  <h2 className="vn-article-title text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 leading-snug mb-2 font-serif">
                     {article.title}
                   </h2>
 
-                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4 font-sans">
                     {article.excerpt}
                   </p>
                 </div>
@@ -372,11 +373,11 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
             {/* Modal Content */}
             <div className="p-6 sm:p-8 space-y-6">
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 leading-snug mb-3">
+                <h1 className="vn-article-title text-xl sm:text-2xl lg:text-3xl font-bold font-serif text-slate-900 leading-snug mb-3">
                   {selectedArticle.title}
                 </h1>
 
-                <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pb-4 border-b border-slate-100">
+                <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pb-4 border-b border-slate-100 font-sans">
                   <div className="flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-slate-400" />
                     <span className="font-medium text-slate-700">{selectedArticle.authorName}</span>
@@ -389,14 +390,12 @@ export const NewsSection: React.FC<NewsSectionProps> = ({
               </div>
 
               {/* Lead Excerpt */}
-              <div className="p-4 bg-amber-50/60 rounded-xl border border-amber-200/80 text-xs sm:text-sm text-amber-950 font-medium leading-relaxed italic">
+              <div className="vn-article-lead p-4 sm:p-5 bg-amber-50/70 rounded-xl border border-amber-200/90 text-sm sm:text-base text-amber-950 font-serif italic leading-relaxed shadow-2xs">
                 {selectedArticle.excerpt}
               </div>
 
-              {/* Body Text */}
-              <div className="prose prose-slate max-w-none text-xs sm:text-sm text-slate-800 leading-relaxed space-y-4 whitespace-pre-wrap font-sans">
-                {selectedArticle.content}
-              </div>
+              {/* Body Text using ArticleRenderer */}
+              <ArticleRenderer content={selectedArticle.content} />
 
               {/* Tags */}
               {selectedArticle.tags && selectedArticle.tags.length > 0 && (

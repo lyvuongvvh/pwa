@@ -283,26 +283,26 @@ export const INITIAL_ARTICLES: ArticleItem[] = [
     createdAt: Date.now() - 86400000 * 2,
     updatedAt: Date.now() - 86400000 * 1,
     tags: ['Viện Việt Học', 'Thư Viện Số Hóa', 'PWA', 'Tìm Kiếm Toàn Văn', 'Thông Báo'],
-    content: `## Chào Mừng Quý Độc Giả Đến Với Cổng Tra Cứu Số Hóa Viện Việt Học
+    content: `## Cổng Tra Cứu Tư Liệu Số Hóa Viện Việt Học
 
 Ban Điều Hành và Thư Viện **Viện Việt Học (Institute of Vietnamese Studies - Westminster, California)** trân trọng giới thiệu đến quý học giả, thân hữu và đồng hương ứng dụng tra cứu tư liệu số hóa theo chuẩn **Progressive Web App (PWA)** hiện đại.
 
 ### Các Tính Năng Nổi Bật:
 
-- **Tìm Kiếm Toàn Văn Nhanh Chóng**: Hệ thống quét qua từng câu chữ trong tất cả các tập tin tài liệu HTML và ấn bản PDF, làm nổi bật ngay đoạn văn chứa từ khóa tìm kiếm (có dấu và không dấu).
+- **Tìm Kiếm Toàn Văn Nhanh Chóng**: Hệ thống quét qua từng câu chữ trong tất cả các tập tin tài liệu HTML và ấn bản PDF, làm nổi bật ngay đoạn văn chứa từ khóa tìm kiếm (hỗ trợ cả chữ Quốc ngữ có dấu và không dấu).
 - **Cài Đặt Dễ Dàng Trực Tiếp Trên Điện Thoại & Máy Tính**: Quý vị có thể nhấn nút **Cài Đặt Ứng Dụng** ở góc trên màn hình để đưa Viện Việt Học về màn hình chính thiết bị di động (iOS, Android) hoặc máy tính (Windows, macOS) như một ứng dụng chuyên biệt.
 - **Hoạt Động Ngoại Tuyến (Offline-Ready)**: Ngay cả khi không có kết nối mạng Internet hoặc khi đang di chuyển, quý vị vẫn có thể mở và tra cứu toàn văn các tài liệu đã được lưu trữ trong bộ nhớ tạm của ứng dụng.
 - **Phân Quyền Vai Trò Người Dùng (RBAC)**:
-  - **Độc Giả (Viewer)**: Đọc, tìm kiếm toàn văn, xem trước tài liệu và tải về miễn phí các bản sao PDF/HTML.
-  - **Biên Tập Viên (Editor)**: Tải lên các tập tin PDF và HTML mới, tự động trích xuất văn bản và viết bài viết/thông báo học thuật mới.
-  - **Quản Trị Viên (Admin)**: Quản lý phân quyền người dùng và kiểm duyệt kho lưu trữ.
+  - **Độc Giả (Viewer)**: Đọc, tìm kiếm toàn văn, xem trước tài liệu và tải về miễn phí các bản sao PDF và HTML.
+  - **Biên Tập Viên (Editor)**: Tải lên các tập tin PDF và HTML mới, tự động trích xuất văn bản và viết bài viết hoặc thông báo học thuật mới.
+  - **Quản Trị Viên (Admin)**: Quản lý phân quyền người dùng và kiểm duyệt toàn bộ kho lưu trữ.
 
 Quý vị hãy sử dụng thanh tìm kiếm phía trên hoặc khám phá các chuyên mục: *Tư liệu & Văn kiện*, *Lịch sử*, *Văn học & Nghệ thuật*, *Ngôn ngữ & Chữ viết*!`,
   },
   {
     id: 'art-thuyet-trinh-am-nhac-co-truyen',
-    title: 'Thông Báo: Buổi Thuyết Trình Học Thuật Chuyên Đề: "Âm Nhạc Cổ Truyền Việt Nam"',
-    excerpt: 'Viện Việt Học trân trọng kính mời quý đồng hương và giới nghiên cứu tham dự buổi thuyết trình và diễn họa âm nhạc dân tộc định kỳ tại hội trường Viện (Westminster, CA).',
+    title: 'Thông Báo Buổi Thuyết Trình Học Thuật: "Âm Nhạc Cổ Truyền Việt Nam"',
+    excerpt: 'Viện Việt Học trân trọng kính mời quý đồng hương và giới nghiên cứu tham dự buổi thuyết trình và diễn họa âm nhạc dân tộc định kỳ tại hội trường Viện (Westminster, California).',
     category: 'Thông báo & Sinh hoạt',
     authorId: 'vien-viet-hoc-editorial',
     authorEmail: 'lyvuong@viethoc.com',
@@ -311,23 +311,24 @@ Quý vị hãy sử dụng thanh tìm kiếm phía trên hoặc khám phá các 
     createdAt: Date.now() - 86400000 * 6,
     updatedAt: Date.now() - 86400000 * 2,
     tags: ['Thuyết Trình', 'Âm Nhạc Cổ Truyền', 'Sinh Hoạt Viện', 'Westminster', 'Văn Hóa'],
-    content: `### Sinh Hoạt Học Thuật Định Kỳ Tại Viện Việt Học
+    content: `## Sinh Hoạt Học Thuật Định Kỳ Tại Viện Việt Học
 
 Nhằm tạo cơ hội tìm hiểu về cội nguồn âm thanh dân tộc, Viện Việt Học trân trọng kính mời quý vị tham dự buổi thuyết trình:
 
-**Chủ đề:** *Âm Nhạc Cổ Truyền Việt Nam - Từ Ca Trù, Nhã Nhạc Cung Đình Đến Đờn Ca Tài Tử Nam Bộ*  
-**Thời gian:** 2:00 PM - 5:00 PM, Thứ Bảy tuần này.  
-**Địa điểm:** Hội trường Viện Việt Học, 15355 Brookhurst St # 222, Westminster, CA 92683.  
-**Diễn giả:** Các nhà nghiên cứu âm nhạc cổ truyền và các nghệ nhân đàn tranh, đàn bầu, đàn tỳ bà.
+- **Chủ đề:** *Âm Nhạc Cổ Truyền Việt Nam - Từ Ca Trù, Nhã Nhạc Cung Đình Đến Đờn Ca Tài Tử Nam Bộ*
+- **Thời gian:** 2:00 PM - 5:00 PM, Thứ Bảy tuần này.
+- **Địa điểm:** Hội trường Viện Việt Học, 15355 Brookhurst St # 222, Westminster, CA 92683.
+- **Diễn giả:** Các nhà nghiên cứu âm nhạc cổ truyền và các nghệ nhân đàn tranh, đàn bầu, đàn tỳ bà.
 
 ### Nội Dung Chương Trình:
+
 1. Nguồn gốc thang âm ngũ cung trong âm nhạc truyền thống Việt.
 2. Vẻ đẹp bác học và triết lý thanh nhã của Nhã Nhạc Cung Đình Huế (Di sản văn hóa phi vật thể của nhân loại).
 3. Không gian diễn xướng Ca Trù Bắc Bộ và Đờn Ca Tài Tử Nam Bộ.
-4. Trình tấu minh họa trực tiếp các khúc ngâm và làn điệu cổ.
-5. Thảo luận và giải đáp thắc mắc cùng diễn giả.
+4. Trình tấu minh họa trực tiếp các khúc ngâm và làn điệu cổ truyền.
+5. Thảo luận và giải đáp thắc mắc cùng quý diễn giả.
 
-Vào cửa hoàn toàn miễn phí. Kính mời quý vị cùng gia đình và các bạn trẻ đến tham dự!`,
+> Vào cửa hoàn toàn miễn phí. Kính mời quý vị cùng gia đình và các bạn trẻ đến tham dự để cùng hòa mình vào không gian âm nhạc truyền thống dân tộc!`,
   },
   {
     id: 'art-tiep-nhan-500-an-ban-quy',
@@ -341,16 +342,18 @@ Vào cửa hoàn toàn miễn phí. Kính mời quý vị cùng gia đình và c
     createdAt: Date.now() - 86400000 * 12,
     updatedAt: Date.now() - 86400000 * 3,
     tags: ['Thư Viện', 'Sách Quý', 'Số Hóa', 'Lịch Sử', 'Tư Liệu'],
-    content: `### Tin Vui Cho Giới Nghiên Cứu Văn Học & Sử Học
+    content: `## Tin Mừng Cho Giới Nghiên Cứu Văn Học & Sử Học
 
 Thư viện Viện Việt Học vừa vinh dự tiếp nhận bộ sưu tập gồm hơn 500 đầu sách và tư liệu quý giá do gia đình một vị giáo sư tiền bối trao tặng.
 
-Trong đợt tiếp nhận này, có nhiều tác phẩm đặc biệt hiếm:
+### Danh Mục Các Tác Phẩm Tiêu Biểu:
+
 - Các ấn bản nguyên bản của tạp chí *Nam Phong Tạp Chí* (chủ bút Phạm Quỳnh), *Tri Tân*, *Tao Đàn*.
 - Các bản dịch thơ Đường của cụ Tản Đà Nguyễn Khắc Hiếu ấn hành tại Hà Nội những năm 1930.
 - Các tập san khảo cứu dân tộc học miền núi Trung phần và Tây Nguyên trước năm 1975.
+- Các bộ từ điển Hán - Nôm và tài liệu địa chí các tỉnh thành Trung Bộ và Nam Bộ.
 
-Hiện nay, Ban Kỹ Thuật Số Hóa của Viện đang tiến hành làm sạch, quét ảnh độ phân giải cao và trích xuất toàn văn (OCR) sang định dạng PDF và HTML để đưa lên cổng tìm kiếm toàn văn trực tuyến PWA này, giúp mọi người dễ dàng tra cứu miễn phí.`,
+Hiện nay, Ban Kỹ Thuật Số Hóa của Viện đang tiến hành làm sạch, quét ảnh độ phân giải cao và trích xuất toàn văn (OCR) sang định dạng PDF và HTML để đưa lên cổng tìm kiếm trực tuyến PWA này, giúp mọi người dễ dàng tra cứu miễn phí.`,
   },
   {
     id: 'art-chuong-trinh-bao-ton-tieng-viet',
@@ -364,15 +367,16 @@ Hiện nay, Ban Kỹ Thuật Số Hóa của Viện đang tiến hành làm sạ
     createdAt: Date.now() - 86400000 * 18,
     updatedAt: Date.now() - 86400000 * 5,
     tags: ['Giáo Dục', 'Tiếng Việt', 'Tuổi Trẻ', 'Bảo Tồn', 'Văn Hóa'],
-    content: `### Giữ Gìn Tiếng Mẹ Đẻ Nơi Xứ Người
+    content: `## Giữ Gìn Tiếng Mẹ Đẻ Nơi Xứ Người
 
-'Tiếng Việt còn thì văn hóa Việt còn' - đó là tâm niệm thiêng liêng mà Viện Việt Học luôn gìn giữ qua hơn hai thập niên hoạt động.
+> 'Tiếng Việt còn thì văn hóa Việt còn' - đó là tâm niệm thiêng liêng mà Viện Việt Học luôn gìn giữ qua hơn hai thập niên hoạt động tại hải ngoại.
 
-Trong năm qua, Ban Giáo Dục của Viện đã:
-- Khai giảng 6 khóa bồi dưỡng Tiếng Việt và Văn Hóa Dân Tộc cho hơn 120 học sinh, sinh viên gốc Việt tại miền Nam California.
-- Tổ chức các chuyến tham quan thư viện, hướng dẫn các em tiếp cận và đọc các tác phẩm văn học cổ điển như Truyện Kiều, Lục Vân Tiên, ca dao dân ca.
-- Phát động cuộc thi viết văn và thuyết trình bằng tiếng Việt về chủ đề 'Gia Đình & Cội Nguồn Dân Tộc'.
+### Các Thành Quả Trong Năm Qua:
 
-Chúng tôi xin gửi lời tri ân chân thành đến các quý phụ huynh và các thầy cô giáo thiện nguyện đã chung tay góp sức trong sứ mệnh cao đẹp này.`,
+- **Các Khóa Học Việt Ngữ**: Khai giảng 6 khóa bồi dưỡng Tiếng Việt và Văn Hóa Dân Tộc cho hơn 120 học sinh, sinh viên gốc Việt tại miền Nam California.
+- **Tiếp Cận Văn Học Cổ Điển**: Tổ chức các chuyến tham quan thư viện, hướng dẫn các em tiếp cận và đọc các tác phẩm văn học kinh điển như *Truyện Kiều*, *Lục Vân Tiên*, ca dao tục ngữ dân tộc.
+- **Cuộc Thi Học Thuật**: Phát động cuộc thi viết văn và thuyết trình bằng tiếng Việt về chủ đề *'Gia Đình & Cội Nguồn Dân Tộc'*.
+
+Chúng tôi xin gửi lời tri ân chân thành đến quý phụ huynh và các thầy cô giáo thiện nguyện đã chung tay góp sức trong sứ mệnh cao đẹp này.`,
   },
 ];
