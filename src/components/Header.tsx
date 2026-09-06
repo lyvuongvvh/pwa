@@ -13,7 +13,8 @@ import {
   Search,
   Building,
   Info,
-  BookOpen
+  BookOpen,
+  X
 } from 'lucide-react';
 import { UserRole } from '../types';
 
@@ -94,12 +95,12 @@ export const Header: React.FC<HeaderProps> = ({
             onSubmit={handleSearchSubmit}
             className="flex-1 max-w-md hidden md:block mx-2 lg:mx-4"
           >
-            <div className="relative">
-              <Search className="w-4 h-4 text-amber-300 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className="relative group">
+              <Search className="w-4 h-4 text-amber-800 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition group-focus-within:text-amber-900" />
               <input
                 id="header-search-input"
                 type="text"
-                placeholder="Tìm kiếm toàn văn tài liệu HTML & PDF..."
+                placeholder="Tìm kiếm tài liệu, sách PDF & tác phẩm..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => {
@@ -107,8 +108,18 @@ export const Header: React.FC<HeaderProps> = ({
                     setActiveTab('documents');
                   }
                 }}
-                className="w-full bg-black/40 hover:bg-black/55 focus:bg-black/70 border border-amber-400/50 focus:border-amber-300 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-amber-100/70 focus:outline-none focus:ring-2 focus:ring-amber-400/40 transition backdrop-blur-xs"
+                className="w-full bg-stone-50 hover:bg-white focus:bg-white text-stone-900 placeholder-stone-500 border border-amber-300 focus:border-amber-600 rounded-lg pl-9 pr-8 py-1.5 text-xs font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-400/50 transition"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 p-0.5 rounded-full hover:bg-stone-200/60 transition"
+                  title="Xóa tìm kiếm"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
           </form>
 
@@ -271,12 +282,12 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Mobile Search Bar */}
         <div className="pb-3 md:hidden">
           <form onSubmit={handleSearchSubmit}>
-            <div className="relative">
-              <Search className="w-4 h-4 text-amber-300 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className="relative group">
+              <Search className="w-4 h-4 text-amber-800 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none group-focus-within:text-amber-900 transition" />
               <input
                 id="mobile-search-input"
                 type="text"
-                placeholder="Tìm kiếm toàn văn tài liệu PDF & HTML..."
+                placeholder="Tìm kiếm tài liệu, sách PDF & tác phẩm..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => {
@@ -284,8 +295,18 @@ export const Header: React.FC<HeaderProps> = ({
                     setActiveTab('documents');
                   }
                 }}
-                className="w-full bg-black/45 border border-amber-400/50 focus:border-amber-300 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-amber-100/70 focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                className="w-full bg-stone-50 hover:bg-white focus:bg-white text-stone-900 placeholder-stone-500 border border-amber-300 focus:border-amber-600 rounded-lg pl-9 pr-8 py-2 text-xs font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-400/50 transition"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 p-0.5 rounded-full hover:bg-stone-200/60 transition"
+                  title="Xóa tìm kiếm"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
           </form>
         </div>
