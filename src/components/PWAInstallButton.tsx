@@ -96,7 +96,7 @@ export const PWAInstallButton: React.FC = () => {
     <button
       id="pwa-install-general-btn"
       onClick={install}
-      className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold text-amber-200 hover:bg-amber-500/20 transition"
+      className="inline-flex items-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-400/20 hover:bg-amber-400/30 px-3 py-1.5 text-xs font-semibold text-amber-100 transition shadow-xs"
       title="Cài đặt Viện Việt Học thành ứng dụng trên máy tính hoặc điện thoại"
     >
       <Download className="w-3.5 h-3.5 text-amber-300" />

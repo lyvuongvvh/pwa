@@ -95,7 +95,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex-1 max-w-md hidden md:block mx-2 lg:mx-4"
           >
             <div className="relative">
-              <Search className="w-4 h-4 text-amber-200/80 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-4 h-4 text-amber-300 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 id="header-search-input"
                 type="text"
@@ -107,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({
                     setActiveTab('documents');
                   }
                 }}
-                className="w-full bg-black/35 hover:bg-black/45 focus:bg-black/60 border border-amber-400/40 focus:border-amber-400 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-400/40 transition backdrop-blur-xs"
+                className="w-full bg-black/40 hover:bg-black/55 focus:bg-black/70 border border-amber-400/50 focus:border-amber-300 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-amber-100/70 focus:outline-none focus:ring-2 focus:ring-amber-400/40 transition backdrop-blur-xs"
               />
             </div>
           </form>
@@ -216,12 +216,12 @@ export const Header: React.FC<HeaderProps> = ({
                 id="role-preview-selector"
                 value={demoRoleOverride || userProfile?.role || 'viewer'}
                 onChange={handleRoleChange}
-                className="text-[11px] font-medium bg-black/45 hover:bg-black/65 text-amber-200 border border-amber-400/40 rounded-lg px-2 py-1 focus:ring-1 focus:ring-amber-400 focus:outline-none cursor-pointer"
+                className="text-[11px] font-semibold bg-black/55 hover:bg-black/75 text-amber-200 border border-amber-400/50 rounded-lg px-2.5 py-1 focus:ring-1 focus:ring-amber-400 focus:outline-none cursor-pointer"
                 title="Chuyển đổi vai trò để thử nghiệm quyền Độc giả / Biên tập viên / Quản trị viên"
               >
-                <option value="viewer" className="bg-stone-900 text-white">Độc giả (Viewer)</option>
-                <option value="editor" className="bg-stone-900 text-white">Biên tập (Editor)</option>
-                <option value="admin" className="bg-stone-900 text-white">Quản trị (Admin)</option>
+                <option value="viewer" className="bg-stone-900 text-white font-medium">Độc giả (Viewer)</option>
+                <option value="editor" className="bg-stone-900 text-white font-medium">Biên tập (Editor)</option>
+                <option value="admin" className="bg-stone-900 text-white font-medium">Quản trị (Admin)</option>
               </select>
             </div>
 
@@ -272,7 +272,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="pb-3 md:hidden">
           <form onSubmit={handleSearchSubmit}>
             <div className="relative">
-              <Search className="w-4 h-4 text-amber-200/80 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-4 h-4 text-amber-300 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 id="mobile-search-input"
                 type="text"
@@ -284,7 +284,7 @@ export const Header: React.FC<HeaderProps> = ({
                     setActiveTab('documents');
                   }
                 }}
-                className="w-full bg-black/35 border border-amber-400/40 focus:border-amber-400 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-400/40"
+                className="w-full bg-black/45 border border-amber-400/50 focus:border-amber-300 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-amber-100/70 focus:outline-none focus:ring-2 focus:ring-amber-400/40"
               />
             </div>
           </form>
