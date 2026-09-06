@@ -1,4 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist';
+import { normalizeVietnameseText } from './vietnameseTypography';
 
 // Configure pdfjs worker
 if (typeof window !== 'undefined' && pdfjsLib.GlobalWorkerOptions) {
@@ -121,7 +122,8 @@ async function parseHtmlFile(file: File): Promise<ParsedDocumentData> {
   // Extract title
   const titleTag = doc.querySelector('title')?.textContent?.trim();
   const h1Tag = doc.querySelector('h1')?.textContent?.trim();
-  const title = titleTag || h1Tag || file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+  const rawTitle = titleTag || h1Tag || file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+  const title = normalizeVietnameseText(rawTitle);
 
   // Clean elements that shouldn't be indexed for text search
   const clone = doc.body ? (doc.body.cloneNode(true) as HTMLElement) : (doc.documentElement.cloneNode(true) as HTMLElement);
@@ -129,9 +131,9 @@ async function parseHtmlFile(file: File): Promise<ParsedDocumentData> {
   elementsToRemove.forEach((el) => el.remove());
 
   const rawText = clone.textContent || '';
-  const textContent = rawText.replace(/\s+/g, ' ').trim();
+  const textContent = normalizeVietnameseText(rawText.replace(/\s+/g, ' ').trim());
   const words = textContent.split(/\s+/).filter(Boolean);
-  const summary = textContent.slice(0, 300) + (textContent.length > 300 ? '...' : '');
+  const summary = normalizeVietnameseText(textContent.slice(0, 300) + (textContent.length > 300 ? '...' : ''));
   const suggestedCategory = detectVietnameseCategory(textContent);
 
   // Read as Data URL for preview
@@ -180,10 +182,10 @@ async function parsePdfFile(file: File): Promise<ParsedDocumentData> {
     extractedText = `PDF Document: ${file.name}\n(Preview available via viewer)`;
   }
 
-  const cleanText = extractedText.replace(/\s+/g, ' ').trim();
+  const cleanText = normalizeVietnameseText(extractedText.replace(/\s+/g, ' ').trim());
   const words = cleanText.split(/\s+/).filter(Boolean);
-  const title = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
-  const summary = cleanText.slice(0, 300) + (cleanText.length > 300 ? '...' : '');
+  const title = normalizeVietnameseText(file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '));
+  const summary = normalizeVietnameseText(cleanText.slice(0, 300) + (cleanText.length > 300 ? '...' : ''));
   const fileDataUrl = await readFileAsDataUrl(file);
   const suggestedCategory = detectVietnameseCategory(cleanText);
 
@@ -199,10 +201,11 @@ async function parsePdfFile(file: File): Promise<ParsedDocumentData> {
 }
 
 async function parseTextFile(file: File): Promise<ParsedDocumentData> {
-  const textContent = await file.text();
+  const rawText = await file.text();
+  const textContent = normalizeVietnameseText(rawText);
   const words = textContent.split(/\s+/).filter(Boolean);
-  const title = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
-  const summary = textContent.slice(0, 300) + (textContent.length > 300 ? '...' : '');
+  const title = normalizeVietnameseText(file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '));
+  const summary = normalizeVietnameseText(textContent.slice(0, 300) + (textContent.length > 300 ? '...' : ''));
 
   return {
     title,
@@ -231,7 +234,8 @@ function readFileAsDataUrl(file: File): Promise<string> {
 
 export function extractSearchTokens(text: string): string[] {
   // Use Unicode property escapes to preserve Vietnamese accented letters
-  const words = text
+  const normalized = normalizeVietnameseText(text);
+  const words = normalized
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s]/gu, ' ')
     .split(/\s+/)
@@ -254,7 +258,9 @@ export function extractSearchTokens(text: string): string[] {
 export function findKeywordSnippets(content: string, query: string, maxSnippets = 3): { snippet: string; matchWord: string }[] {
   if (!query || !content) return [];
 
-  const rawQueryTerms = query
+  const normContent = normalizeVietnameseText(content);
+  const normQuery = normalizeVietnameseText(query);
+  const rawQueryTerms = normQuery
     .trim()
     .split(/\s+/)
     .filter((t) => t.length > 1);

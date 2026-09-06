@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { DocumentItem, DocumentType } from '../types';
 import { findKeywordSnippets, removeVietnameseTones } from '../utils/fileParser';
+import { normalizeVietnameseText } from '../utils/vietnameseTypography';
 import { useAuth } from '../context/AuthContext';
 import {
   Search,
@@ -213,7 +214,7 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
             <span>Kho Lưu Trữ Tư Liệu & Thư Viện Số Hóa</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold font-serif tracking-tight text-white mb-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold font-sans tracking-tight text-white mb-2">
             Kho Tài Liệu Toàn Văn Viện Việt Học
           </h1>
           <p className="text-amber-100 text-xs sm:text-sm leading-relaxed mb-5">
@@ -407,8 +408,8 @@ export const DocumentArchive: React.FC<DocumentArchiveProps> = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 leading-snug mb-2 font-serif">
-                  {doc.title}
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 leading-snug mb-2 font-sans">
+                  {normalizeVietnameseText(doc.title)}
                 </h3>
 
                 {/* Summary */}

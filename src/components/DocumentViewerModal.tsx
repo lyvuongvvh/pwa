@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DocumentItem } from '../types';
+import { normalizeVietnameseText } from '../utils/vietnameseTypography';
 import {
   X,
   Download,
@@ -110,7 +111,7 @@ export const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({
               {document.fileType.toUpperCase()}
             </span>
             <div className="min-w-0">
-              <h2 className="text-sm font-semibold text-white truncate font-serif">{document.title}</h2>
+              <h2 className="text-sm font-semibold text-white truncate font-sans">{normalizeVietnameseText(document.title)}</h2>
               <p className="text-[11px] text-stone-400 truncate">{document.fileName} &bull; {formatFileSize(document.fileSize)}</p>
             </div>
           </div>
@@ -214,7 +215,7 @@ export const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({
           <div className="flex-1 overflow-y-auto p-6 bg-white">
             {activeView === 'preview' && document.htmlContent ? (
               <div
-                className="prose max-w-none text-stone-800 leading-relaxed font-serif"
+                className="prose max-w-none text-stone-800 leading-relaxed font-sans"
                 dangerouslySetInnerHTML={{ __html: document.htmlContent }}
               />
             ) : activeView === 'raw' && document.htmlContent ? (
@@ -222,7 +223,7 @@ export const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({
                 {document.htmlContent}
               </pre>
             ) : (
-              <div className="font-serif text-sm text-stone-800 leading-relaxed whitespace-pre-wrap">
+              <div className="font-sans text-sm text-stone-800 leading-relaxed whitespace-pre-wrap">
                 {renderHighlightedText(document.textContent, inDocSearch)}
               </div>
             )}
@@ -230,7 +231,7 @@ export const DocumentViewerModal: React.FC<DocumentViewerModalProps> = ({
 
           {/* Right Info Sidebar */}
           <aside className="w-full md:w-72 bg-stone-50 border-t md:border-t-0 md:border-l border-stone-200 p-5 overflow-y-auto shrink-0 text-xs">
-            <h3 className="font-bold text-stone-900 uppercase tracking-wider text-[11px] mb-3 font-serif">
+            <h3 className="font-bold text-stone-900 uppercase tracking-wider text-[11px] mb-3 font-sans">
               Thông Tin Văn Kiện
             </h3>
 

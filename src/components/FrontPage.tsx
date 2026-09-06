@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DocumentItem, ArticleItem } from '../types';
 import { useAuth } from '../context/AuthContext';
+import { normalizeVietnameseText } from '../utils/vietnameseTypography';
 import {
   Search,
   BookOpen,
@@ -104,7 +105,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
             <span>Thành lập ngày 26 tháng 2 năm 2000 &bull; Westminster, California</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3 font-serif">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3 font-sans">
             VIỆN VIỆT HỌC
           </h1>
           <p className="text-base sm:text-xl font-medium text-amber-100 tracking-wide uppercase mb-3">
@@ -228,12 +229,12 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                   </span>
                 </div>
 
-                <h3 className="vn-article-title text-base sm:text-lg font-bold font-serif text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 mb-2 leading-snug">
-                  {article.title}
+                <h3 className="vn-article-title text-base sm:text-lg font-bold font-sans text-slate-900 group-hover:text-[#0b5394] transition line-clamp-2 mb-2 leading-snug">
+                  {normalizeVietnameseText(article.title)}
                 </h3>
 
                 <p className="text-xs sm:text-sm font-sans text-slate-600 line-clamp-2 leading-relaxed mb-3">
-                  {article.excerpt}
+                  {normalizeVietnameseText(article.excerpt)}
                 </p>
 
                 <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-[#0b5394] font-semibold group-hover:underline">
@@ -374,7 +375,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
       {/* 3. Academic & Thematic Pillars (Các Chuyên Mục Nghiên Cứu Viện Việt Học) */}
       <section className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-serif mb-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-sans mb-2">
             Các Chuyên Mục Nghiên Cứu & Học Thuật
           </h2>
           <p className="text-xs sm:text-sm text-slate-600">
@@ -482,7 +483,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
             <span className="text-[11px] font-bold uppercase tracking-wider text-amber-800">
               Trụ Sở & Thư Viện Nghiên Cứu
             </span>
-            <h3 className="text-xl font-bold text-slate-900 font-serif">
+            <h3 className="text-xl font-bold text-slate-900 font-sans">
               Viện Việt Học & Thư Viện Hơn 8.000 Đầu Sách
             </h3>
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">

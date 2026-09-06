@@ -53,7 +53,7 @@ export const PWAInstallButton: React.FC = () => {
           >
             <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl border border-stone-200 text-stone-900">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-base font-bold text-stone-900 font-serif">
+                <h3 className="text-base font-bold text-stone-900 font-sans">
                   Cài Đặt Trên iPhone & iPad
                 </h3>
                 <button

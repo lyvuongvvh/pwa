@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { ArticleItem } from '../types';
 import { extractSearchTokens } from '../utils/fileParser';
 import { ArticleRenderer } from './ArticleRenderer';
+import { normalizeVietnameseText } from '../utils/vietnameseTypography';
 import {
   X,
   PlusCircle,
@@ -169,14 +170,14 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
     setError(null);
 
     const articleId = initialArticle?.id || `art-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
-    const effectiveContent = content.trim() || (asDraft ? '(Bản nháp đang soạn thảo...)' : '');
-    const autoExcerpt =
-      excerpt.trim() ||
-      effectiveContent.slice(0, 180).trim() + (effectiveContent.length > 180 ? '...' : '');
+    const effectiveContent = normalizeVietnameseText(content.trim() || (asDraft ? '(Bản nháp đang soạn thảo...)' : ''));
+    const normalizedTitle = normalizeVietnameseText(title.trim());
+    const rawExcerpt = excerpt.trim() || effectiveContent.slice(0, 180).trim() + (effectiveContent.length > 180 ? '...' : '');
+    const autoExcerpt = normalizeVietnameseText(rawExcerpt);
 
     const savedArticle: ArticleItem = {
       id: articleId,
-      title: title.trim(),
+      title: normalizedTitle,
       content: effectiveContent,
       excerpt: autoExcerpt,
       category,
@@ -234,7 +235,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white font-serif">
+                <h2 className="text-base font-bold text-white font-sans">
                   {initialArticle
                     ? initialArticle.published === false
                       ? 'Hoàn Thiện Bản Nháp'
@@ -314,7 +315,7 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Ví dụ: Thông Báo Buổi Thuyết Trình Học Thuật Thứ Bảy"
-                className="w-full text-sm sm:text-base font-serif font-bold bg-white border border-stone-300 rounded-lg px-3.5 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394]"
+                className="w-full text-sm sm:text-base font-sans font-bold bg-white border border-stone-300 rounded-lg px-3.5 py-2 text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#0b5394]"
               />
             </div>
             <div>
@@ -394,12 +395,12 @@ export const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
             ) : (
               <div className="p-4 sm:p-5 rounded-xl border border-stone-300 bg-stone-50 min-h-[220px] max-h-[350px] overflow-y-auto">
                 <div className="mb-4 pb-3 border-b border-stone-200">
-                  <h3 className="vn-article-title text-lg font-bold font-serif text-slate-900 mb-2">
-                    {title || '(Chưa có tiêu đề)'}
+                  <h3 className="vn-article-title text-lg font-bold font-sans text-slate-900 mb-2">
+                    {normalizeVietnameseText(title) || '(Chưa có tiêu đề)'}
                   </h3>
                   {excerpt && (
-                    <div className="vn-article-lead text-xs sm:text-sm font-serif italic text-amber-950 bg-amber-100/50 p-3 rounded-lg border border-amber-200/60 leading-relaxed mb-2">
-                      {excerpt}
+                    <div className="vn-article-lead text-xs sm:text-sm font-sans italic text-amber-950 bg-amber-100/50 p-3 rounded-lg border border-amber-200/60 leading-relaxed mb-2">
+                      {normalizeVietnameseText(excerpt)}
                     </div>
                   )}
                 </div>

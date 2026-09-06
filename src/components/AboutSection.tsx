@@ -26,7 +26,7 @@ export const AboutSection: React.FC = () => {
               <Building className="w-3.5 h-3.5 text-amber-300" />
               <span>Thành lập ngày 26 tháng 2 năm 2000</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold font-serif tracking-tight text-white mb-2">
+            <h1 className="text-3xl sm:text-4xl font-extrabold font-sans tracking-tight text-white mb-2">
               Giới Thiệu Viện Việt Học
             </h1>
             <p className="text-base font-medium text-amber-200 uppercase tracking-wider mb-4">
@@ -52,7 +52,7 @@ export const AboutSection: React.FC = () => {
           <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center">
             <Award className="w-6 h-6" />
           </div>
-          <h2 className="text-lg font-bold text-slate-900 font-serif">
+          <h2 className="text-lg font-bold text-slate-900 font-sans">
             Tôn Chỉ & Mục Đích Hoạt Động
           </h2>
           <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -79,7 +79,7 @@ export const AboutSection: React.FC = () => {
           <div className="w-10 h-10 rounded-xl bg-sky-100 text-[#0b5394] flex items-center justify-center">
             <BookOpen className="w-6 h-6" />
           </div>
-          <h2 className="text-lg font-bold text-slate-900 font-serif">
+          <h2 className="text-lg font-bold text-slate-900 font-sans">
             Thư Viện & Kho Sách Nghiên Cứu
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -94,7 +94,7 @@ export const AboutSection: React.FC = () => {
 
       {/* Các Ban Chuyên Môn */}
       <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-5">
-        <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-serif">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-sans">
           Các Hoạt Động & Ban Chuyên Môn
         </h2>
 
@@ -129,7 +129,7 @@ export const AboutSection: React.FC = () => {
       <div className="bg-amber-50 rounded-2xl p-6 sm:p-8 border border-amber-200 shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-serif">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-sans">
               Trụ Sở & Thư Viện Viện Việt Học
             </h2>
             <div className="space-y-1.5 text-xs sm:text-sm text-slate-700">

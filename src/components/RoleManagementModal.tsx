@@ -94,7 +94,7 @@ export const RoleManagementModal: React.FC<RoleManagementModalProps> = ({
               <Shield className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-white font-serif">
+              <h2 className="text-sm font-bold text-white font-sans">
                 Quản Trị Phân Quyền Người Dùng (RBAC)
               </h2>
               <p className="text-[11px] text-stone-400">

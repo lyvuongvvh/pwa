@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Type, BookOpen, ZoomIn, ZoomOut, Check } from 'lucide-react';
+import { normalizeVietnameseText } from '../utils/vietnameseTypography';
 
 interface ArticleRendererProps {
   content: string;
@@ -12,11 +13,13 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({
   className = '',
   showControls = true,
 }) => {
-  const [fontFamily, setFontFamily] = useState<'serif' | 'sans'>('serif');
+  const [fontFamily, setFontFamily] = useState<'sans' | 'serif'>('sans');
   const [fontSize, setFontSize] = useState<'normal' | 'large'>('normal');
 
   // Parses raw Vietnamese text with markdown formatting (headers, lists, bold, italics, blockquotes)
-  const renderFormattedParagraphs = (raw: string) => {
+  const renderFormattedParagraphs = (rawContent: string) => {
+    // Ensure all characters are precomposed NFC and any stray separated accents are resolved
+    const raw = normalizeVietnameseText(rawContent);
     const lines = raw.split('\n');
     const elements: React.ReactNode[] = [];
     let currentList: { type: 'ul' | 'ol'; items: string[] } | null = null;
@@ -66,7 +69,7 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({
         elements.push(
           <h3
             key={`h3-${idx}`}
-            className="text-base sm:text-lg font-bold font-serif text-slate-900 mt-6 mb-3 tracking-tight border-b border-stone-200 pb-1.5 text-[#0b5394]"
+            className="text-base sm:text-lg font-bold text-slate-900 mt-6 mb-3 tracking-tight border-b border-stone-200 pb-1.5 text-[#0b5394]"
           >
             {renderInlineFormatting(trimmed.replace(/^###\s+/, ''))}
           </h3>
@@ -79,7 +82,7 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({
         elements.push(
           <h2
             key={`h2-${idx}`}
-            className="text-lg sm:text-xl font-bold font-serif text-slate-900 mt-7 mb-3 tracking-tight border-b border-amber-200 pb-2 text-[#084175]"
+            className="text-lg sm:text-xl font-bold text-slate-900 mt-7 mb-3 tracking-tight border-b border-amber-200 pb-2 text-[#084175]"
           >
             {renderInlineFormatting(trimmed.replace(/^##\s+/, ''))}
           </h2>
@@ -92,7 +95,7 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({
         elements.push(
           <h1
             key={`h1-${idx}`}
-            className="text-xl sm:text-2xl font-bold font-serif text-slate-900 mt-8 mb-4 tracking-tight border-b-2 border-[#0b5394] pb-2"
+            className="text-xl sm:text-2xl font-bold text-slate-900 mt-8 mb-4 tracking-tight border-b-2 border-[#0b5394] pb-2"
           >
             {renderInlineFormatting(trimmed.replace(/^#\s+/, ''))}
           </h1>
@@ -106,7 +109,7 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({
         elements.push(
           <blockquote
             key={`quote-${idx}`}
-            className="p-4 my-4 rounded-xl bg-amber-50/70 border-l-4 border-amber-600 text-stone-800 italic font-serif leading-relaxed text-sm sm:text-base shadow-2xs"
+            className="p-4 my-4 rounded-xl bg-amber-50/70 border-l-4 border-amber-600 text-stone-800 italic leading-relaxed text-sm sm:text-base shadow-2xs"
           >
             {renderInlineFormatting(trimmed.replace(/^>\s+/, ''))}
           </blockquote>
@@ -215,27 +218,27 @@ export const ArticleRenderer: React.FC<ArticleRendererProps> = ({
             <div className="inline-flex rounded-lg border border-stone-300 bg-white p-0.5">
               <button
                 type="button"
-                onClick={() => setFontFamily('serif')}
-                className={`px-2.5 py-1 rounded-md transition font-serif ${
-                  fontFamily === 'serif'
-                    ? 'bg-[#0b5394] text-white font-bold shadow-2xs'
-                    : 'text-stone-700 hover:text-stone-900'
-                }`}
-                title="Phông chữ Lora - Chuẩn mực thư tịch, báo chí văn hóa"
-              >
-                Chữ Có Chân (Lora)
-              </button>
-              <button
-                type="button"
                 onClick={() => setFontFamily('sans')}
                 className={`px-2.5 py-1 rounded-md transition font-sans ${
                   fontFamily === 'sans'
                     ? 'bg-[#0b5394] text-white font-semibold shadow-2xs'
                     : 'text-stone-700 hover:text-stone-900'
                 }`}
-                title="Phông chữ Be Vietnam Pro - Chuẩn mực hiện đại"
+                title="Phông chữ Be Vietnam Pro - Chuẩn Quốc Ngữ, chuẩn hóa chính xác mọi tổ hợp dấu tiếng Việt (ầ, ấ, ế, ề, ồ, ớ, ừ...)"
               >
                 Chân Phương (Be Vietnam Pro)
+              </button>
+              <button
+                type="button"
+                onClick={() => setFontFamily('serif')}
+                className={`px-2.5 py-1 rounded-md transition font-serif ${
+                  fontFamily === 'serif'
+                    ? 'bg-[#0b5394] text-white font-bold shadow-2xs'
+                    : 'text-stone-700 hover:text-stone-900'
+                }`}
+                title="Phông chữ Noto Serif - Chuẩn mực thư tịch học thuật, bảo đảm toàn vẹn dấu Quốc ngữ"
+              >
+                Chữ Có Chân (Noto Serif)
               </button>
             </div>
           </div>

@@ -12,6 +12,7 @@ import { RoleManagementModal } from './components/RoleManagementModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { DocumentItem, ArticleItem } from './types';
 import { INITIAL_DOCUMENTS, INITIAL_ARTICLES } from './data/seedData';
+import { normalizeVietnameseText } from './utils/vietnameseTypography';
 import { db } from './firebase';
 import { collection, onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore';
 import { Building, MapPin, Mail, Globe, ShieldCheck, Heart } from 'lucide-react';
@@ -38,16 +39,23 @@ function AppContent() {
   });
 
   const [articles, setArticles] = useState<ArticleItem[]>(() => {
+    const normalizeArticle = (art: ArticleItem): ArticleItem => ({
+      ...art,
+      title: normalizeVietnameseText(art.title),
+      excerpt: normalizeVietnameseText(art.excerpt),
+      content: normalizeVietnameseText(art.content),
+    });
+
     try {
       const cached = localStorage.getItem(STORAGE_ARTICLES_KEY);
       if (cached) {
         const parsed = JSON.parse(cached);
         if (Array.isArray(parsed) && parsed.length > 0) {
           const map = new Map<string, ArticleItem>();
-          INITIAL_ARTICLES.forEach((art) => map.set(art.id, art));
+          INITIAL_ARTICLES.forEach((art) => map.set(art.id, normalizeArticle(art)));
           parsed.forEach((art: ArticleItem) => {
             if (!map.has(art.id)) {
-              map.set(art.id, art);
+              map.set(art.id, normalizeArticle(art));
             }
           });
           return Array.from(map.values());
@@ -56,7 +64,7 @@ function AppContent() {
     } catch {
       // Fallback to seed data
     }
-    return INITIAL_ARTICLES;
+    return INITIAL_ARTICLES.map(normalizeArticle);
   });
 
   // Modal States
@@ -85,10 +93,25 @@ function AppContent() {
       (snapshot) => {
         if (!snapshot.empty) {
           const remoteDocs: DocumentItem[] = [];
-          snapshot.forEach((d) => remoteDocs.push(d.data() as DocumentItem));
+          snapshot.forEach((d) => {
+            const raw = d.data() as DocumentItem;
+            remoteDocs.push({
+              ...raw,
+              title: normalizeVietnameseText(raw.title || ''),
+              summary: raw.summary ? normalizeVietnameseText(raw.summary) : '',
+              textContent: normalizeVietnameseText(raw.textContent || ''),
+            });
+          });
           // Merge with initial Vietnamese docs
           const mergedMap = new Map<string, DocumentItem>();
-          INITIAL_DOCUMENTS.forEach((doc) => mergedMap.set(doc.id, doc));
+          INITIAL_DOCUMENTS.forEach((doc) =>
+            mergedMap.set(doc.id, {
+              ...doc,
+              title: normalizeVietnameseText(doc.title),
+              summary: doc.summary ? normalizeVietnameseText(doc.summary) : '',
+              textContent: normalizeVietnameseText(doc.textContent),
+            })
+          );
           remoteDocs.forEach((doc) => mergedMap.set(doc.id, doc));
 
           const all = Array.from(mergedMap.values());
@@ -115,10 +138,25 @@ function AppContent() {
       (snapshot) => {
         if (!snapshot.empty) {
           const remoteArticles: ArticleItem[] = [];
-          snapshot.forEach((d) => remoteArticles.push(d.data() as ArticleItem));
+          snapshot.forEach((d) => {
+            const raw = d.data() as ArticleItem;
+            remoteArticles.push({
+              ...raw,
+              title: normalizeVietnameseText(raw.title || ''),
+              excerpt: normalizeVietnameseText(raw.excerpt || ''),
+              content: normalizeVietnameseText(raw.content || ''),
+            });
+          });
 
           const mergedMap = new Map<string, ArticleItem>();
-          INITIAL_ARTICLES.forEach((art) => mergedMap.set(art.id, art));
+          INITIAL_ARTICLES.forEach((art) =>
+            mergedMap.set(art.id, {
+              ...art,
+              title: normalizeVietnameseText(art.title),
+              excerpt: normalizeVietnameseText(art.excerpt),
+              content: normalizeVietnameseText(art.content),
+            })
+          );
           remoteArticles.forEach((art) => mergedMap.set(art.id, art));
 
           const all = Array.from(mergedMap.values());
@@ -339,7 +377,7 @@ function AppContent() {
                 className="h-11 w-auto object-contain drop-shadow-sm"
               />
               <div>
-                <h3 className="text-sm font-extrabold text-white tracking-wide font-serif">
+                <h3 className="text-sm font-extrabold text-white tracking-wide font-sans">
                   VIỆN VIỆT HỌC &bull; INSTITUTE OF VIETNAMESE STUDIES
                 </h3>
                 <p className="text-[11px] text-amber-200/80">

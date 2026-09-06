@@ -203,7 +203,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
               <Upload className="w-4 h-4 text-amber-200" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white font-serif">
+              <h2 className="text-base font-bold text-white font-sans">
                 Tải Lên & Số Hóa Văn Kiện
               </h2>
               <p className="text-xs text-sky-200">
