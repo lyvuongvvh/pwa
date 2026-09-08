@@ -20,6 +20,7 @@ import {
   HelpCircle,
   Eye,
   Scroll,
+  Key,
 } from 'lucide-react';
 import { CHU_NOM_SAMPLES, ChuNomSample } from '../data/chuNomSamples';
 import { ChuNomTranslationResult, DocumentItem } from '../types';
@@ -175,7 +176,25 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
     setNoticeMessage(null);
     setSavedSuccess(false);
 
-    // Step 1: Initiating
+    // If a pre-curated classical sample is active, immediately present the full scholarly analysis
+    if (selectedSample) {
+      setLoadingStep(`Đang tra cứu tàng thư mộc bản: ${selectedSample.title}...`);
+      setTimeout(() => {
+        setLoadingStep('Đang đồng bộ phiên âm Quốc ngữ & chú giải điển tích...');
+      }, 400);
+
+      setTimeout(() => {
+        setResult(selectedSample.precomputedResult);
+        setNoticeMessage(
+          `Đã hiển thị toàn văn giải mã đối chiếu mộc bản "${selectedSample.title}". Bạn có thể xem bảng đối chiếu liên dòng, chú giải cổ ngữ và lưu vào văn khố cá nhân.`
+        );
+        setIsLoading(false);
+        setLoadingStep('');
+      }, 900);
+      return;
+    }
+
+    // Step 1: Initiating for custom user image uploads
     setLoadingStep('Đang chuẩn bị và tối ưu hóa kích thước hình ảnh...');
 
     try {
@@ -208,7 +227,7 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
           imageBase64: compressedBase64,
           mimeType: finalMime,
           context: contextInput.trim(),
-          sampleId: selectedSample?.id || '',
+          sampleId: '',
         }),
       });
 
@@ -239,18 +258,10 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
       setResult(data.data);
     } catch (err: any) {
       console.error('Translation error:', err);
-      // If network/offline or Gemini fails and user selected a sample, fallback cleanly to high-fidelity data
-      if (selectedSample) {
-        setResult(selectedSample.precomputedResult);
-        setNoticeMessage(
-          'Đã hiển thị bản giải mã đối chiếu học thuật chuẩn của Viện Việt Học. (Ghi chú: Khóa API Gemini hiện tại chưa mở quyền trong dự án Google Cloud; bạn có thể cấu hình GEMINI_API_KEY trong Settings > Secrets để kích hoạt thị giác máy tính cho ảnh tự tải lên).'
-        );
-      } else {
-        setErrorMessage(
-          err?.message ||
-            'Lỗi kết nối máy chủ Gemini. Quý vị vui lòng thử lại hoặc chọn một mẫu mộc bản có sẵn để khảo sát.'
-        );
-      }
+      setErrorMessage(
+        err?.message ||
+          'Lỗi kết nối máy chủ Gemini. Quý vị vui lòng thử lại hoặc chọn một mẫu mộc bản có sẵn để khảo sát.'
+      );
     } finally {
       setIsLoading(false);
       setLoadingStep('');
@@ -547,23 +558,52 @@ ${result.annotations.map((a) => `• ${a.term}: ${a.explanation}`).join('\n')}
 
             {/* Error Feedback */}
             {errorMessage && (
-              <div className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs space-y-2">
-                <div className="flex items-start gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <div className="p-4 rounded-xl bg-stone-50 border border-stone-300 text-stone-800 text-xs space-y-3 shadow-xs">
+                <div className="flex items-start gap-2.5 text-amber-900 font-medium">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-amber-700" />
                   <span className="leading-relaxed">{errorMessage}</span>
                 </div>
-                {!selectedSample && (
-                  <div className="pt-1 border-t border-red-200/60 flex items-center justify-between">
-                    <span className="text-[11px] text-stone-600">Trải nghiệm ngay bản dịch mẫu:</span>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectSample(CHU_NOM_SAMPLES[0])}
-                      className="px-2.5 py-1 rounded bg-amber-800 hover:bg-amber-900 text-white font-medium text-[11px] transition shadow-xs"
-                    >
-                      Mẫu Truyện Kiều &rarr;
-                    </button>
+
+                {/* Structured Resolution Guide */}
+                <div className="bg-white p-3 rounded-lg border border-stone-200 space-y-2">
+                  <div className="font-semibold text-stone-900 text-[11px] flex items-center gap-1.5">
+                    <Key className="w-3.5 h-3.5 text-amber-800" />
+                    <span>Hướng dẫn kích hoạt thị giác máy tính cho ảnh tự tải:</span>
                   </div>
-                )}
+                  <ol className="list-decimal list-inside text-[11px] text-stone-600 space-y-1 pl-1 leading-relaxed">
+                    <li>
+                      Tạo khóa API tại{' '}
+                      <span className="font-mono text-amber-900 font-semibold">
+                        aistudio.google.com
+                      </span>
+                    </li>
+                    <li>
+                      Nhấp biểu tượng bánh răng <span className="font-semibold text-stone-800">Settings &gt; Secrets</span> trong AI Studio.
+                    </li>
+                    <li>
+                      Thêm bí danh <span className="font-mono bg-stone-100 px-1 py-0.5 rounded text-amber-900 font-bold">GEMINI_API_KEY</span> và dán khóa API của quý vị.
+                    </li>
+                  </ol>
+                </div>
+
+                {/* Quick Sample Selector */}
+                <div className="pt-2 border-t border-stone-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <span className="text-[11px] text-stone-600 font-medium">
+                    Hoặc khảo sát ngay các bản mộc bản chuẩn:
+                  </span>
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    {CHU_NOM_SAMPLES.map((s) => (
+                      <button
+                        key={s.id}
+                        type="button"
+                        onClick={() => handleSelectSample(s)}
+                        className="px-2 py-1 rounded bg-amber-100 hover:bg-amber-200 text-amber-900 font-medium text-[10px] transition border border-amber-300/60"
+                      >
+                        {s.title.split('(')[0].trim()}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
 
