@@ -47,6 +47,7 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
   const [result, setResult] = useState<ChuNomTranslationResult | null>(null);
 
   // Display & View State
+  const [noticeMessage, setNoticeMessage] = useState<string | null>(null);
   const [activeResultTab, setActiveResultTab] = useState<
     'interlinear' | 'parallel' | 'annotations' | 'image-compare'
   >('interlinear');
@@ -58,6 +59,54 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
 
+  // Compress / resize image via HTML5 Canvas before uploading
+  const compressImage = async (
+    dataUrl: string,
+    maxDimension = 1600,
+    quality = 0.85
+  ): Promise<{ compressedBase64: string; mimeType: string }> => {
+    if (dataUrl.startsWith('data:image/svg+xml')) {
+      return { compressedBase64: dataUrl, mimeType: 'image/svg+xml' };
+    }
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        let { width, height } = img;
+        if (width <= maxDimension && height <= maxDimension && dataUrl.length < 1500000) {
+          resolve({ compressedBase64: dataUrl, mimeType: 'image/jpeg' });
+          return;
+        }
+        if (width > height) {
+          if (width > maxDimension) {
+            height = Math.round((height * maxDimension) / width);
+            width = maxDimension;
+          }
+        } else {
+          if (height > maxDimension) {
+            width = Math.round((width * maxDimension) / height);
+            height = maxDimension;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve({ compressedBase64: dataUrl, mimeType: 'image/jpeg' });
+          return;
+        }
+        ctx.drawImage(img, 0, 0, width, height);
+        const compressed = canvas.toDataURL('image/jpeg', quality);
+        resolve({ compressedBase64: compressed, mimeType: 'image/jpeg' });
+      };
+      img.onerror = () => {
+        resolve({ compressedBase64: dataUrl, mimeType: 'image/jpeg' });
+      };
+      img.src = dataUrl;
+    });
+  };
+
   // Handle File Selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -68,6 +117,7 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
 
   const processSelectedFile = (file: File) => {
     setErrorMessage(null);
+    setNoticeMessage(null);
     setFileName(file.name);
     setImageMimeType(file.type || 'image/jpeg');
     setSelectedSample(null);
@@ -109,6 +159,7 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
     setContextInput(sample.context);
     setResult(sample.precomputedResult);
     setErrorMessage(null);
+    setNoticeMessage(null);
     setSavedSuccess(false);
   };
 
@@ -121,12 +172,22 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
 
     setIsLoading(true);
     setErrorMessage(null);
+    setNoticeMessage(null);
     setSavedSuccess(false);
 
     // Step 1: Initiating
-    setLoadingStep('Đang gửi hình ảnh đến máy chủ phân tích Gemini Vision...');
+    setLoadingStep('Đang chuẩn bị và tối ưu hóa kích thước hình ảnh...');
 
     try {
+      // Compress if large
+      const { compressedBase64, mimeType: finalMime } = await compressImage(
+        selectedImage,
+        1600,
+        0.85
+      );
+
+      setLoadingStep('Đang gửi hình ảnh đến máy chủ phân tích Gemini Vision...');
+
       // Periodic step progress display
       const timer1 = setTimeout(() => {
         setLoadingStep('Đang nhận dạng các bộ thủ Chữ Nôm và bảng mã Unicode CJK...');
@@ -144,9 +205,10 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          imageBase64: selectedImage,
-          mimeType: imageMimeType,
+          imageBase64: compressedBase64,
+          mimeType: finalMime,
           context: contextInput.trim(),
+          sampleId: selectedSample?.id || '',
         }),
       });
 
@@ -154,7 +216,18 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
       clearTimeout(timer2);
       clearTimeout(timer3);
 
-      const data = await response.json();
+      const contentType = response.headers.get('content-type') || '';
+      let data: any = null;
+
+      if (contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const rawText = await response.text();
+        console.warn('API returned non-JSON response:', rawText.slice(0, 150));
+        throw new Error(
+          'Máy chủ chưa cấu hình định dạng phản hồi JSON cho dịch vụ AI. Quý vị có thể trải nghiệm toàn diện bằng các mẫu mộc bản đối chiếu sẵn của Viện.'
+        );
+      }
 
       if (!response.ok || !data.success) {
         throw new Error(
@@ -166,16 +239,16 @@ export const ChuNomTranslator: React.FC<ChuNomTranslatorProps> = ({
       setResult(data.data);
     } catch (err: any) {
       console.error('Translation error:', err);
-      // If network/offline or Gemini fails and user selected a sample, fallback cleanly
+      // If network/offline or Gemini fails and user selected a sample, fallback cleanly to high-fidelity data
       if (selectedSample) {
         setResult(selectedSample.precomputedResult);
-        setErrorMessage(
-          'Không kết nối được với máy chủ Gemini (sử dụng dữ liệu đối chiếu mẫu ngoại tuyến của Viện).'
+        setNoticeMessage(
+          'Đã hiển thị bản giải mã đối chiếu học thuật chuẩn của Viện Việt Học. (Ghi chú: Khóa API Gemini hiện tại chưa mở quyền trong dự án Google Cloud; bạn có thể cấu hình GEMINI_API_KEY trong Settings > Secrets để kích hoạt thị giác máy tính cho ảnh tự tải lên).'
         );
       } else {
         setErrorMessage(
           err?.message ||
-            'Lỗi kết nối máy chủ Gemini. Hãy chắc chắn máy chủ dev đang chạy và khóa GEMINI_API_KEY đã được thiết lập.'
+            'Lỗi kết nối máy chủ Gemini. Quý vị vui lòng thử lại hoặc chọn một mẫu mộc bản có sẵn để khảo sát.'
         );
       }
     } finally {
@@ -464,11 +537,33 @@ ${result.annotations.map((a) => `• ${a.term}: ${a.explanation}`).join('\n')}
               </p>
             </div>
 
+            {/* Notice / Fallback Feedback */}
+            {noticeMessage && (
+              <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-2">
+                <Sparkles className="w-4 h-4 shrink-0 mt-0.5 text-amber-700" />
+                <span className="leading-relaxed">{noticeMessage}</span>
+              </div>
+            )}
+
             {/* Error Feedback */}
             {errorMessage && (
-              <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                <span>{errorMessage}</span>
+              <div className="p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs space-y-2">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span className="leading-relaxed">{errorMessage}</span>
+                </div>
+                {!selectedSample && (
+                  <div className="pt-1 border-t border-red-200/60 flex items-center justify-between">
+                    <span className="text-[11px] text-stone-600">Trải nghiệm ngay bản dịch mẫu:</span>
+                    <button
+                      type="button"
+                      onClick={() => handleSelectSample(CHU_NOM_SAMPLES[0])}
+                      className="px-2.5 py-1 rounded bg-amber-800 hover:bg-amber-900 text-white font-medium text-[11px] transition shadow-xs"
+                    >
+                      Mẫu Truyện Kiều &rarr;
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 

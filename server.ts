@@ -45,25 +45,31 @@ app.get('/api/health', (_req, res) => {
 // Chữ Nôm AI Decryption and Translation endpoint
 app.post('/api/translate-chu-nom', async (req, res) => {
   try {
-    const { imageBase64, mimeType = 'image/jpeg', context = '' } = req.body;
+    const { imageBase64, mimeType = 'image/jpeg', context = '', sampleId = '' } = req.body;
 
-    if (!imageBase64) {
-      res.status(400).json({
-        error: 'Thiếu dữ liệu hình ảnh (imageBase64 is required).',
+    if (!imageBase64 && !sampleId) {
+      res.json({
+        success: false,
+        error: 'Thiếu dữ liệu hình ảnh (imageBase64 hoặc sampleId là bắt buộc).',
       });
       return;
     }
 
     // Clean base64 string if data URL prefix exists
-    let cleanBase64 = imageBase64;
+    let cleanBase64 = imageBase64 || '';
     let detectedMime = mimeType;
-    if (imageBase64.includes(';base64,')) {
-      const parts = imageBase64.split(';base64,');
+    if (cleanBase64.includes(';base64,')) {
+      const parts = cleanBase64.split(';base64,');
       cleanBase64 = parts[1];
       const matchMime = parts[0].match(/data:(.*?)$/);
       if (matchMime && matchMime[1]) {
         detectedMime = matchMime[1];
       }
+    } else if (cleanBase64.startsWith('data:image/svg+xml')) {
+      // If SVG data URL without base64, encode it to base64
+      const svgContent = cleanBase64.replace(/^data:image\/svg\+xml;utf8,/, '');
+      cleanBase64 = Buffer.from(decodeURIComponent(svgContent)).toString('base64');
+      detectedMime = 'image/svg+xml';
     }
 
     const ai = getGeminiClient();
@@ -89,105 +95,128 @@ Your tasks:
 Respond strictly in JSON format matching the schema.
     `.trim();
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
-      contents: {
-        parts: [
-          {
-            inlineData: {
-              mimeType: detectedMime,
-              data: cleanBase64,
-            },
+    // Attempt Gemini with fallbacks across flash aliases
+    const candidateModels = ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite'];
+    let lastError: any = null;
+    let parsedData: any = null;
+
+    for (const modelName of candidateModels) {
+      try {
+        const response = await ai.models.generateContent({
+          model: modelName,
+          contents: {
+            parts: [
+              {
+                inlineData: {
+                  mimeType: detectedMime,
+                  data: cleanBase64,
+                },
+              },
+              {
+                text: promptText,
+              },
+            ],
           },
-          {
-            text: promptText,
-          },
-        ],
-      },
-      config: {
-        responseMimeType: 'application/json',
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            nomUnicode: {
-              type: Type.STRING,
-              description: 'Full transcribed Chữ Nôm characters line by line',
-            },
-            quocNgu: {
-              type: Type.STRING,
-              description: 'Full modern Vietnamese Quốc ngữ transliteration line by line',
-            },
-            modernTranslation: {
-              type: Type.STRING,
-              description: 'Clear, elegant modern Vietnamese translation and meaning',
-            },
-            scriptType: {
-              type: Type.STRING,
-              description: 'Calligraphic/engraving style (e.g. Mộc bản khắc gỗ, Khải thư chân phương, Hành thư, Thảo thư)',
-            },
-            estimatedPeriod: {
-              type: Type.STRING,
-              description: 'Estimated historical period or dynasty (e.g. Triều Lê, Triều Nguyễn, Thế kỷ XVIII-XIX)',
-            },
-            literaryGenre: {
-              type: Type.STRING,
-              description: 'Genre (e.g. Thơ Lục bát, Song thất lục bát, Thơ Đường luật, Sắc phong, Văn tế)',
-            },
-            summary: {
-              type: Type.STRING,
-              description: 'Executive summary of the document contents',
-            },
-            lines: {
-              type: Type.ARRAY,
-              description: 'Detailed line-by-line and word-by-word breakdown for interlinear view',
-              items: {
-                type: Type.OBJECT,
-                properties: {
-                  lineNumber: { type: Type.INTEGER },
-                  nomText: { type: Type.STRING },
-                  quocNguText: { type: Type.STRING },
-                  words: {
-                    type: Type.ARRAY,
-                    items: {
-                      type: Type.OBJECT,
-                      properties: {
-                        nom: { type: Type.STRING },
-                        quocNgu: { type: Type.STRING },
-                        hanViet: { type: Type.STRING },
-                        meaning: { type: Type.STRING },
+          config: {
+            responseMimeType: 'application/json',
+            responseSchema: {
+              type: Type.OBJECT,
+              properties: {
+                nomUnicode: {
+                  type: Type.STRING,
+                  description: 'Full transcribed Chữ Nôm characters line by line',
+                },
+                quocNgu: {
+                  type: Type.STRING,
+                  description: 'Full modern Vietnamese Quốc ngữ transliteration line by line',
+                },
+                modernTranslation: {
+                  type: Type.STRING,
+                  description: 'Clear, elegant modern Vietnamese translation and meaning',
+                },
+                scriptType: {
+                  type: Type.STRING,
+                  description: 'Calligraphic/engraving style (e.g. Mộc bản khắc gỗ, Khải thư chân phương)',
+                },
+                estimatedPeriod: {
+                  type: Type.STRING,
+                  description: 'Estimated historical period or dynasty',
+                },
+                literaryGenre: {
+                  type: Type.STRING,
+                  description: 'Genre (e.g. Thơ Lục bát, Song thất lục bát, Thơ Đường luật)',
+                },
+                summary: {
+                  type: Type.STRING,
+                  description: 'Executive summary of the document contents',
+                },
+                lines: {
+                  type: Type.ARRAY,
+                  description: 'Detailed line-by-line and word-by-word breakdown for interlinear view',
+                  items: {
+                    type: Type.OBJECT,
+                    properties: {
+                      lineNumber: { type: Type.INTEGER },
+                      nomText: { type: Type.STRING },
+                      quocNguText: { type: Type.STRING },
+                      words: {
+                        type: Type.ARRAY,
+                        items: {
+                          type: Type.OBJECT,
+                          properties: {
+                            nom: { type: Type.STRING },
+                            quocNgu: { type: Type.STRING },
+                            hanViet: { type: Type.STRING },
+                            meaning: { type: Type.STRING },
+                          },
+                          required: ['nom', 'quocNgu'],
+                        },
                       },
-                      required: ['nom', 'quocNgu'],
                     },
+                    required: ['lineNumber', 'nomText', 'quocNguText'],
                   },
                 },
-                required: ['lineNumber', 'nomText', 'quocNguText'],
-              },
-            },
-            annotations: {
-              type: Type.ARRAY,
-              description: 'Scholarly notes explaining archaic terms and classical references',
-              items: {
-                type: Type.OBJECT,
-                properties: {
-                  term: { type: Type.STRING },
-                  explanation: { type: Type.STRING },
+                annotations: {
+                  type: Type.ARRAY,
+                  description: 'Scholarly notes explaining archaic terms and classical references',
+                  items: {
+                    type: Type.OBJECT,
+                    properties: {
+                      term: { type: Type.STRING },
+                      explanation: { type: Type.STRING },
+                    },
+                    required: ['term', 'explanation'],
+                  },
                 },
-                required: ['term', 'explanation'],
               },
+              required: ['nomUnicode', 'quocNgu', 'modernTranslation', 'annotations'],
             },
           },
-          required: ['nomUnicode', 'quocNgu', 'modernTranslation', 'annotations'],
-        },
-      },
-    });
+        });
 
-    const responseText = response.text || '{}';
-    const parsedData = JSON.parse(responseText);
+        const responseText = response.text || '{}';
+        parsedData = JSON.parse(responseText);
+        break; // Success!
+      } catch (err: any) {
+        lastError = err;
+        // If not found or service unavailable, try next candidate model
+        const msg = String(err?.message || '');
+        if (msg.includes('404') || msg.includes('503') || msg.includes('NOT_FOUND')) {
+          continue;
+        }
+        break;
+      }
+    }
 
-    res.json({
-      success: true,
-      data: parsedData,
-    });
+    if (parsedData) {
+      res.json({
+        success: true,
+        data: parsedData,
+      });
+      return;
+    }
+
+    throw lastError || new Error('Không thể phân tích dữ liệu hình ảnh.');
   } catch (error: any) {
     console.error('Gemini Chữ Nôm translation error:', error);
     const errorStr = String(error?.message || '');
@@ -197,12 +226,16 @@ Respond strictly in JSON format matching the schema.
       errorStr.includes('denied access');
 
     const userMessage = isAuthError
-      ? 'Khóa API Gemini chưa được kích hoạt quyền truy cập hoặc hạn ngạch trong dự án Google Cloud (quý vị có thể cập nhật GEMINI_API_KEY trong mục Settings > Secrets). Quý vị vẫn có thể trải nghiệm toàn diện bộ công cụ bằng các mẫu mộc bản đối chiếu sẵn trong thư viện.'
+      ? 'Dịch vụ Gemini AI hiện chưa được cấp quyền trong dự án Google Cloud (PERMISSION_DENIED). Quý vị có thể cập nhật GEMINI_API_KEY hợp lệ trong Settings > Secrets để phân tích hình ảnh tự tải lên, hoặc sử dụng các bản mẫu mộc bản có sẵn trong thư viện để nghiên cứu đối chiếu học thuật.'
       : error?.message || 'Không thể dịch hình ảnh Chữ Nôm. Vui lòng kiểm tra lại hình ảnh hoặc thử lại sau.';
 
-    res.status(isAuthError ? 403 : 500).json({
+    // CRITICAL: Always return HTTP 200 with success: false.
+    // Returning 403 or 500 causes Nginx reverse proxy to intercept with error_page and return HTML (e.g. /forbidden.html),
+    // which triggers "Unexpected token '<' ... is not valid JSON" in the browser!
+    res.json({
       success: false,
       error: userMessage,
+      isAuthError,
     });
   }
 });
