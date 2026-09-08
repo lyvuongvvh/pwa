@@ -10,21 +10,22 @@ import { AboutSection } from './components/AboutSection';
 import { ArticleEditorModal } from './components/ArticleEditorModal';
 import { RoleManagementModal } from './components/RoleManagementModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
+import { ChuNomTranslator } from './components/ChuNomTranslator';
 import { DocumentItem, ArticleItem } from './types';
 import { INITIAL_DOCUMENTS, INITIAL_ARTICLES } from './data/seedData';
 import { normalizeVietnameseText } from './utils/vietnameseTypography';
 import { db } from './firebase';
 import { collection, onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore';
-import { Building, MapPin, Mail, Globe, ShieldCheck, Heart } from 'lucide-react';
+import { Building, MapPin, Mail, Globe, ShieldCheck, Heart, Languages } from 'lucide-react';
 
 const STORAGE_DOCS_KEY = 'viethoc_pwa_documents_v2';
 const STORAGE_ARTICLES_KEY = 'viethoc_pwa_articles_v2';
 
 function AppContent() {
-  const { isEditor, isAdmin } = useAuth();
+  const { isEditor, isAdmin, user } = useAuth();
 
-  // Navigation & Search State: 'home' | 'documents' | 'articles' | 'about'
-  const [activeTab, setActiveTab] = useState<'home' | 'documents' | 'articles' | 'about'>('home');
+  // Navigation & Search State: 'home' | 'documents' | 'articles' | 'nom-translator' | 'about'
+  const [activeTab, setActiveTab] = useState<'home' | 'documents' | 'articles' | 'nom-translator' | 'about'>('home');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Data State with resilient local caching
@@ -264,6 +265,31 @@ function AppContent() {
     setActiveTab('articles');
   };
 
+  const handleSaveChuNomAsDocument = async (docData: Partial<DocumentItem>) => {
+    const newDoc: DocumentItem = {
+      id: `doc-nom-${Date.now()}`,
+      title: docData.title || 'Bản Dịch Chữ Nôm',
+      fileName: docData.fileName || 'dich-chu-nom.txt',
+      fileType: docData.fileType || 'text',
+      fileSize: (docData.textContent?.length || 500) * 2,
+      textContent: docData.textContent || '',
+      summary: docData.summary || '',
+      tags: docData.tags || ['Chữ Nôm', 'Dịch Thuật AI'],
+      category: docData.category || 'Hán Nôm & Cổ Thư',
+      authorId: user?.uid || 'researcher',
+      authorEmail: user?.email || 'lyvuong@viethoc.com',
+      authorName: user?.displayName || 'Viện Việt Học',
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      wordCount: (docData.textContent || '').trim().split(/\s+/).length,
+    };
+
+    handleDocumentAdded(newDoc);
+    try {
+      await setDoc(doc(db, 'documents', newDoc.id), newDoc);
+    } catch {}
+  };
+
   return (
     <div className="min-h-screen bg-[url('/viethoc-parchment-bg.jpg')] bg-fixed bg-cover bg-center text-stone-900 flex flex-col font-sans selection:bg-amber-200 selection:text-amber-950">
       {/* Offline Status Badge */}
@@ -316,6 +342,13 @@ function AppContent() {
             onDeleteArticle={handleDeleteArticle}
             selectedArticleExternal={selectedArticleExternal}
             onClearSelectedArticleExternal={() => setSelectedArticleExternal(null)}
+          />
+        )}
+
+        {activeTab === 'nom-translator' && (
+          <ChuNomTranslator
+            onSaveAsDocument={handleSaveChuNomAsDocument}
+            onNavigateTab={setActiveTab}
           />
         )}
 

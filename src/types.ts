@@ -63,3 +63,35 @@ export interface SearchResultItem {
   matches: SearchMatch[];
   relevanceScore: number;
 }
+
+export interface ChuNomWord {
+  nom: string;
+  quocNgu: string;
+  hanViet?: string;
+  meaning?: string;
+}
+
+export interface ChuNomLine {
+  lineNumber: number;
+  nomText: string;
+  quocNguText: string;
+  words?: ChuNomWord[];
+}
+
+export interface ChuNomAnnotation {
+  term: string;
+  explanation: string;
+}
+
+export interface ChuNomTranslationResult {
+  nomUnicode: string;
+  quocNgu: string;
+  modernTranslation: string;
+  scriptType?: string;
+  estimatedPeriod?: string;
+  literaryGenre?: string;
+  summary?: string;
+  lines?: ChuNomLine[];
+  annotations: ChuNomAnnotation[];
+}
+

@@ -14,13 +14,15 @@ import {
   Building,
   Info,
   BookOpen,
+  Languages,
+  Sparkles,
   X
 } from 'lucide-react';
 import { UserRole } from '../types';
 
 interface HeaderProps {
-  activeTab: 'home' | 'documents' | 'articles' | 'about';
-  setActiveTab: (tab: 'home' | 'documents' | 'articles' | 'about') => void;
+  activeTab: 'home' | 'documents' | 'articles' | 'nom-translator' | 'about';
+  setActiveTab: (tab: 'home' | 'documents' | 'articles' | 'nom-translator' | 'about') => void;
   onOpenUpload: () => void;
   onOpenNewArticle: () => void;
   onOpenRoleManager: () => void;
@@ -162,6 +164,20 @@ export const Header: React.FC<HeaderProps> = ({
               <Newspaper className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Tin Tức & Sinh Hoạt</span>
               <span className="sm:hidden">Tin Tức</span>
+            </button>
+
+            <button
+              id="nav-tab-nom-translator"
+              onClick={() => setActiveTab('nom-translator')}
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                activeTab === 'nom-translator'
+                  ? 'bg-amber-400 text-stone-950 shadow-sm font-bold'
+                  : 'text-stone-100 hover:text-white hover:bg-white/15'
+              }`}
+            >
+              <Languages className="w-3.5 h-3.5 text-amber-300" />
+              <span className="hidden lg:inline">Dịch Chữ Nôm AI</span>
+              <span className="lg:hidden">Chữ Nôm AI</span>
             </button>
 
             <button

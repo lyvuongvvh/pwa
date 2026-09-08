@@ -29,7 +29,7 @@ import {
 interface FrontPageProps {
   documents: DocumentItem[];
   articles: ArticleItem[];
-  onNavigateTab: (tab: 'home' | 'documents' | 'articles' | 'about') => void;
+  onNavigateTab: (tab: 'home' | 'documents' | 'articles' | 'nom-translator' | 'about') => void;
   onOpenDocument: (doc: DocumentItem, highlightTerm?: string) => void;
   onOpenUpload: () => void;
   onOpenNewArticle: () => void;
@@ -174,6 +174,38 @@ export const FrontPage: React.FC<FrontPageProps> = ({
               <span className="text-[11px] text-amber-200 block">Khả Năng Ngoại Tuyến</span>
               <span className="text-xl font-bold text-emerald-300">PWA Offline</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Chữ Nôm AI Decryption & Translation Highlight Card */}
+      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-stone-900 via-amber-950 to-stone-900 border border-amber-500/30 p-6 sm:p-7 text-amber-50 shadow-lg">
+        <div className="absolute right-4 -bottom-6 font-serif text-8xl text-amber-500/10 pointer-events-none select-none">
+          喃
+        </div>
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold border border-amber-400/30">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span>Đột Phá Nghiên Cứu • Gemini AI Multimodal Vision</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-white tracking-tight">
+              Giải Mã &amp; Dịch Thuật Văn Bản Chữ Nôm Bằng Trí Tuệ Nhân Tạo
+            </h2>
+            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+              Bạn có ảnh chụp mộc bản, gia phả cổ, bia ký hoặc sắc phong Chữ Nôm? Công cụ AI đa phương thức sẽ tự động nhận diện ký tự Nôm Unicode CJK, đối chiếu liên dòng từng chữ, phiên âm chữ Quốc ngữ và trích xuất chú giải điển tích học thuật.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+            <button
+              onClick={() => onNavigateTab('nom-translator')}
+              className="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm shadow-md transition active:scale-95 flex items-center justify-center gap-2"
+            >
+              <Languages className="w-4 h-4 text-stone-950" />
+              <span>Khám Phá Dịch Chữ Nôm</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
